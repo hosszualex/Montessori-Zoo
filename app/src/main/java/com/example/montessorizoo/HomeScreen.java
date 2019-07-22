@@ -6,16 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.os.*;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class HomeScreen extends AppCompatActivity {
 
-    FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
-
-    Button signout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,22 +28,16 @@ public class HomeScreen extends AppCompatActivity {
 
         welcome.setText("Welcome to the ZOO, " +username+ "!");
 
-        signout = findViewById(R.id.button_signout);
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        signout.setOnClickListener(new View.OnClickListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) { //sign out button
-                FirebaseAuth.getInstance().signOut();
-                Intent isignout = new Intent(HomeScreen.this,UserLogin.class);
-                isignout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //clear the user
-                isignout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(isignout);
+            public void run() {
+                final Intent mainIntent = new Intent(HomeScreen.this, AnimalsList.class);
+                HomeScreen.this.startActivity(mainIntent);
+                HomeScreen.this.finish();
             }
-        });
-
+        }, 5000);
 
     }
+
+
 }
