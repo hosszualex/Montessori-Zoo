@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class AnimalsList extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private AnimalAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager_Horizontal;
     private RecyclerView.LayoutManager mLayoutManager_Vertical;
 
@@ -84,24 +84,59 @@ public class AnimalsList extends AppCompatActivity {
             public void onClick(View v) {
                 if(viewType==false)
                 {
-                    RecyclerView.Adapter mAdapter_change;
+                    AnimalAdapter mAdapter_change;
                     mAdapter_change = new AnimalAdapter(animalList);
                     mRecyclerView.setLayoutManager(mLayoutManager_Horizontal);
                     mRecyclerView.setAdapter(mAdapter_change);
                     viewType = true;
+                    mAdapter_change.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
+                        @Override
+                        public void onItemClick(int position) {
+                /*animalList.get(position).changeText1("Clicked");
+                mAdapter.notifyItemChanged(position);*/
+
+                            final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
+                            startActivity(animalpageIntent);
+                        }
+                    });
 
                 }
                 else
                     if(viewType==true)
                 {
-                    RecyclerView.Adapter mAdapter_change;
+                    AnimalAdapter mAdapter_change;
                     mAdapter_change = new AnimalAdapter(animalList);
                     mRecyclerView.setLayoutManager(mLayoutManager_Vertical);
                     mRecyclerView.setAdapter(mAdapter_change);
                     viewType = false;
+                    mAdapter_change.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
+                        @Override
+                        public void onItemClick(int position) {
+                /*animalList.get(position).changeText1("Clicked");
+                mAdapter.notifyItemChanged(position);*/
+
+                            final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
+                            startActivity(animalpageIntent);
+                        }
+                    });
+
                 }
             }
         });
+
+
+
+        mAdapter.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
+            @Override
+            public void onItemClick(int position) {
+                /*animalList.get(position).changeText1("Clicked");
+                mAdapter.notifyItemChanged(position);*/
+
+                final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
+                startActivity(animalpageIntent);
+            }
+        });
+
 
 
 

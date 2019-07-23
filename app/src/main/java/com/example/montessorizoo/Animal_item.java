@@ -12,6 +12,11 @@ public class Animal_item {
         this.mDesc = mDesc;
 
     }
+
+    public void changeText1(String text){
+        mName = text;
+    }
+
     public int getmImageAnimal(){
         return mImageAnimal;
     }

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,15 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
 
     private ArrayList<Animal_item> mAnimalList;
 
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
 
 public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
 
@@ -25,12 +35,23 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
     public TextView mDesc;
 
 
-        public AnimalViewHolder(@NonNull View itemView) {
+        public AnimalViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
         super(itemView);
 
         mImageView = itemView.findViewById(R.id.image_item);
         mTitle = itemView.findViewById(R.id.textView_title);
         mDesc = itemView.findViewById(R.id.textView_desc);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(listener != null){
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION)
+                        listener.onItemClick(position);
+                }
+            }
+        });
 
 
         }
@@ -48,14 +69,14 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
     if(AnimalsList.returnBool()==false)
     {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item, viewGroup, false);
-        AnimalViewHolder avh = new AnimalViewHolder(v);
+        AnimalViewHolder avh = new AnimalViewHolder(v,mListener);
 
         return avh;
     }
         else
     {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item_card, viewGroup, false);
-        AnimalViewHolder avh_card = new AnimalViewHolder(v);
+        AnimalViewHolder avh_card = new AnimalViewHolder(v,mListener);
 
         return avh_card;
     }
