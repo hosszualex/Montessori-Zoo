@@ -44,10 +44,24 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
     @NonNull
     @Override
     public AnimalViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
+    if(AnimalsList.returnBool()==false)
+    {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item, viewGroup, false);
         AnimalViewHolder avh = new AnimalViewHolder(v);
+
         return avh;
     }
+        else
+    {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item_card, viewGroup, false);
+        AnimalViewHolder avh_card = new AnimalViewHolder(v);
+
+        return avh_card;
+    }
+
+
+}
 
     @Override
     public void onBindViewHolder(@NonNull AnimalViewHolder animalViewHolder, int position) {

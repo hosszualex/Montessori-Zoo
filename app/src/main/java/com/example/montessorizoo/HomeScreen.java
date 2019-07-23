@@ -35,7 +35,7 @@ public class HomeScreen extends AppCompatActivity {
                 HomeScreen.this.startActivity(mainIntent);
                 HomeScreen.this.finish();
             }
-        }, 5000);
+        }, 1000);
 
     }
 

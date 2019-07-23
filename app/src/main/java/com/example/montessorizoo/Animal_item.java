@@ -20,7 +20,6 @@ public class Animal_item {
         return mName;
     }
 
-
     public String getmDesc() {
         return mDesc;
     }
