@@ -44,24 +44,9 @@ public class AnimalsList extends AppCompatActivity {
         setContentView(R.layout.activity_animals_list);
 
         final ArrayList<Animal_item> animalList = new ArrayList<>();
-        animalList.add(new Animal_item(R.drawable.ic_android, "WolfSDFSDFS", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_all_out, "Wolf", "Mammalasdddddddd"));
-        animalList.add(new Animal_item(R.drawable.ic_block, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_android, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_all_out, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_block, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_android, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_all_out, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_block, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_android, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_all_out, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_block, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_android, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_all_out, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_block, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_android, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_all_out, "Wolf", "Mammal"));
-        animalList.add(new Animal_item(R.drawable.ic_block, "Wolf", "Mammal"));
+        animalList.add(new Animal_item(R.drawable.ic_android, "WolfSDFSDFS", "Mammal", "Meat", "They hunt in packs", R.drawable.ic_all_out, R.raw.wolf_sound));
+        animalList.add(new Animal_item(R.drawable.ic_all_out, "Wolf", "Mammalasdddddddd", "Meat", "They hunt in packs",R.drawable.ic_android,R.raw.wolf_sound));
+        animalList.add(new Animal_item(R.drawable.ic_block, "Wolf", "Mammal", "Meat", "They hunt in packs",R.drawable.ic_all_out,R.raw.wolf_sound));
 
 
         viewType = false;
@@ -92,10 +77,13 @@ public class AnimalsList extends AppCompatActivity {
                     mAdapter_change.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
                         @Override
                         public void onItemClick(int position) {
-                /*animalList.get(position).changeText1("Clicked");
-                mAdapter.notifyItemChanged(position);*/
-
                             final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
+                            animalpageIntent.putExtra("NAME", animalList.get(position).getmName());
+                            animalpageIntent.putExtra("CLASS", animalList.get(position).getmDesc());
+                            animalpageIntent.putExtra("FOOD", animalList.get(position).getmFood());
+                            animalpageIntent.putExtra("FACTS", animalList.get(position).getmFunFacts());
+                            animalpageIntent.putExtra("IMAGE", animalList.get(position).getmImageAnimal());
+                            animalpageIntent.putExtra("MAP", animalList.get(position).getmImageMap());
                             startActivity(animalpageIntent);
                         }
                     });
@@ -112,10 +100,13 @@ public class AnimalsList extends AppCompatActivity {
                     mAdapter_change.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
                         @Override
                         public void onItemClick(int position) {
-                /*animalList.get(position).changeText1("Clicked");
-                mAdapter.notifyItemChanged(position);*/
-
                             final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
+                            animalpageIntent.putExtra("NAME", animalList.get(position).getmName());
+                            animalpageIntent.putExtra("CLASS", animalList.get(position).getmDesc());
+                            animalpageIntent.putExtra("FOOD", animalList.get(position).getmFood());
+                            animalpageIntent.putExtra("FACTS", animalList.get(position).getmFunFacts());
+                            animalpageIntent.putExtra("IMAGE", animalList.get(position).getmImageAnimal());
+                            animalpageIntent.putExtra("MAP", animalList.get(position).getmImageMap());
                             startActivity(animalpageIntent);
                         }
                     });
@@ -129,10 +120,13 @@ public class AnimalsList extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
             @Override
             public void onItemClick(int position) {
-                /*animalList.get(position).changeText1("Clicked");
-                mAdapter.notifyItemChanged(position);*/
-
                 final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
+                animalpageIntent.putExtra("NAME", animalList.get(position).getmName());
+                animalpageIntent.putExtra("CLASS", animalList.get(position).getmDesc());
+                animalpageIntent.putExtra("FOOD", animalList.get(position).getmFood());
+                animalpageIntent.putExtra("FACTS", animalList.get(position).getmFunFacts());
+                animalpageIntent.putExtra("IMAGE", animalList.get(position).getmImageAnimal());
+                animalpageIntent.putExtra("MAP", animalList.get(position).getmImageMap());
                 startActivity(animalpageIntent);
             }
         });
@@ -153,6 +147,7 @@ public class AnimalsList extends AppCompatActivity {
                 isignout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //clear the user
                 isignout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(isignout);
+                finish();
             }
         });
 
