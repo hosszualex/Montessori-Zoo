@@ -115,6 +115,30 @@
             android:layout_marginTop="40dp"
             />
 
+        <Button
+            android:id="@+id/buttonDetail"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/roundedbutton"
+            android:text="Details"
+            android:textSize="10sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/textViewDetails"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="Details"
+            android:layout_below="@+id/buttonDetail"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:maxLines="10"
+            />
+
 
     </RelativeLayout>
 

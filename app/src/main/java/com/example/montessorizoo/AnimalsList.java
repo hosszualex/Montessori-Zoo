@@ -44,9 +44,33 @@ public class AnimalsList extends AppCompatActivity {
         setContentView(R.layout.activity_animals_list);
 
         final ArrayList<Animal_item> animalList = new ArrayList<>();
-        animalList.add(new Animal_item(R.drawable.ic_android, "WolfSDFSDFS", "Mammal", "Meat", "They hunt in packs", R.drawable.ic_all_out, R.raw.wolf_sound));
-        animalList.add(new Animal_item(R.drawable.ic_all_out, "Wolf", "Mammalasdddddddd", "Meat", "They hunt in packs",R.drawable.ic_android,R.raw.wolf_sound));
-        animalList.add(new Animal_item(R.drawable.ic_block, "Wolf", "Mammal", "Meat", "They hunt in packs",R.drawable.ic_all_out,R.raw.wolf_sound));
+        animalList.add(new Animal_item(R.drawable.ic_android, "WolfSDFSDFS", "Mammal", "Meat", "They hunt in packs", R.drawable.ic_all_out,
+                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It is the largest extant member of its family, with males averaging 43–45 kg (95–99 lb) and females 36–38.5 kg (79–85 lb). It is distinguished from other Canis species by its larger size and less pointed features, particularly on the ears and muzzle. Its winter fur is long and bushy and predominantly a mottled gray in color, although nearly pure white, red and brown to black also occur. Mammal Species of the World (3rd ed., 2005), a standard reference work in zoology, recognises 38 subspecies of C. lupus.",
+                "wolf_sound"));
+        animalList.add(new Animal_item(R.drawable.ic_all_out, "Wolf", "Mammalasdddddddd", "Meat", "They hunt in packs",R.drawable.ic_android,
+"The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It is the largest extant member of its family, with males averaging 43–45 kg (95–99 lb) and females 36–38.5 kg (79–85 lb). It is distinguished from other Canis species by its larger size and less pointed features, particularly on the ears and muzzle. Its winter fur is long and bushy and predominantly a mottled gray in color, although nearly pure white, red and brown to black also occur. Mammal Species of the World (3rd ed., 2005), a standard reference work in zoology, recognises 38 subspecies of C. lupus.",
+                "cow_sound"));
+        animalList.add(new Animal_item(R.drawable.ic_block, "Wolf", "Mammal", "Meat", "They hunt in packs",R.drawable.ic_all_out,
+"The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It is the largest extant member of its family, with males averaging 43–45 kg (95–99 lb) and females 36–38.5 kg (79–85 lb). It is distinguished from other Canis species by its larger size and less pointed features, particularly on the ears and muzzle. Its winter fur is long and bushy and predominantly a mottled gray in color, although nearly pure white, red and brown to black also occur. Mammal Species of the World (3rd ed., 2005), a standard reference work in zoology, recognises 38 subspecies of C. lupus.",
+                "wolf_sound"));
+        animalList.add(new Animal_item(R.drawable.ic_android, "WolfSDFSDFS", "Mammal", "Meat", "They hunt in packs", R.drawable.ic_all_out,
+                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It is the largest extant member of its family, with males averaging 43–45 kg (95–99 lb) and females 36–38.5 kg (79–85 lb). It is distinguished from other Canis species by its larger size and less pointed features, particularly on the ears and muzzle. Its winter fur is long and bushy and predominantly a mottled gray in color, although nearly pure white, red and brown to black also occur. Mammal Species of the World (3rd ed., 2005), a standard reference work in zoology, recognises 38 subspecies of C. lupus.",
+                "wolf_sound"));
+        animalList.add(new Animal_item(R.drawable.ic_all_out, "Wolf", "Mammalasdddddddd", "Meat", "They hunt in packs",R.drawable.ic_android,
+                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It is the largest extant member of its family, with males averaging 43–45 kg (95–99 lb) and females 36–38.5 kg (79–85 lb). It is distinguished from other Canis species by its larger size and less pointed features, particularly on the ears and muzzle. Its winter fur is long and bushy and predominantly a mottled gray in color, although nearly pure white, red and brown to black also occur. Mammal Species of the World (3rd ed., 2005), a standard reference work in zoology, recognises 38 subspecies of C. lupus.",
+                "cow_sound"));
+        animalList.add(new Animal_item(R.drawable.ic_block, "Wolf", "Mammal", "Meat", "They hunt in packs",R.drawable.ic_all_out,
+                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It is the largest extant member of its family, with males averaging 43–45 kg (95–99 lb) and females 36–38.5 kg (79–85 lb). It is distinguished from other Canis species by its larger size and less pointed features, particularly on the ears and muzzle. Its winter fur is long and bushy and predominantly a mottled gray in color, although nearly pure white, red and brown to black also occur. Mammal Species of the World (3rd ed., 2005), a standard reference work in zoology, recognises 38 subspecies of C. lupus.",
+                "wolf_sound"));
+        animalList.add(new Animal_item(R.drawable.ic_android, "WolfSDFSDFS", "Mammal", "Meat", "They hunt in packs", R.drawable.ic_all_out,
+                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It is the largest extant member of its family, with males averaging 43–45 kg (95–99 lb) and females 36–38.5 kg (79–85 lb). It is distinguished from other Canis species by its larger size and less pointed features, particularly on the ears and muzzle. Its winter fur is long and bushy and predominantly a mottled gray in color, although nearly pure white, red and brown to black also occur. Mammal Species of the World (3rd ed., 2005), a standard reference work in zoology, recognises 38 subspecies of C. lupus.",
+                "wolf_sound"));
+        animalList.add(new Animal_item(R.drawable.ic_all_out, "Wolf", "Mammalasdddddddd", "Meat", "They hunt in packs",R.drawable.ic_android,
+                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It is the largest extant member of its family, with males averaging 43–45 kg (95–99 lb) and females 36–38.5 kg (79–85 lb). It is distinguished from other Canis species by its larger size and less pointed features, particularly on the ears and muzzle. Its winter fur is long and bushy and predominantly a mottled gray in color, although nearly pure white, red and brown to black also occur. Mammal Species of the World (3rd ed., 2005), a standard reference work in zoology, recognises 38 subspecies of C. lupus.",
+                "cow_sound"));
+        animalList.add(new Animal_item(R.drawable.ic_block, "Wolf", "Mammal", "Meat", "They hunt in packs",R.drawable.ic_all_out,
+                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It is the largest extant member of its family, with males averaging 43–45 kg (95–99 lb) and females 36–38.5 kg (79–85 lb). It is distinguished from other Canis species by its larger size and less pointed features, particularly on the ears and muzzle. Its winter fur is long and bushy and predominantly a mottled gray in color, although nearly pure white, red and brown to black also occur. Mammal Species of the World (3rd ed., 2005), a standard reference work in zoology, recognises 38 subspecies of C. lupus.",
+                "wolf_sound"));
 
 
         viewType = false;
@@ -84,6 +108,9 @@ public class AnimalsList extends AppCompatActivity {
                             animalpageIntent.putExtra("FACTS", animalList.get(position).getmFunFacts());
                             animalpageIntent.putExtra("IMAGE", animalList.get(position).getmImageAnimal());
                             animalpageIntent.putExtra("MAP", animalList.get(position).getmImageMap());
+                            animalpageIntent.putExtra("DETAIL", animalList.get(position).getmDetails());
+                            animalpageIntent.putExtra("SOUND", animalList.get(position).getmAudioFile());
+
                             startActivity(animalpageIntent);
                         }
                     });
@@ -107,6 +134,10 @@ public class AnimalsList extends AppCompatActivity {
                             animalpageIntent.putExtra("FACTS", animalList.get(position).getmFunFacts());
                             animalpageIntent.putExtra("IMAGE", animalList.get(position).getmImageAnimal());
                             animalpageIntent.putExtra("MAP", animalList.get(position).getmImageMap());
+                            animalpageIntent.putExtra("DETAIL", animalList.get(position).getmDetails());
+                            animalpageIntent.putExtra("SOUND", animalList.get(position).getmAudioFile());
+
+
                             startActivity(animalpageIntent);
                         }
                     });
@@ -127,6 +158,9 @@ public class AnimalsList extends AppCompatActivity {
                 animalpageIntent.putExtra("FACTS", animalList.get(position).getmFunFacts());
                 animalpageIntent.putExtra("IMAGE", animalList.get(position).getmImageAnimal());
                 animalpageIntent.putExtra("MAP", animalList.get(position).getmImageMap());
+                animalpageIntent.putExtra("DETAIL", animalList.get(position).getmDetails());
+                animalpageIntent.putExtra("SOUND", animalList.get(position).getmAudioFile());
+
                 startActivity(animalpageIntent);
             }
         });
