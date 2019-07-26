@@ -27,7 +27,6 @@ public class AnimalPage extends AppCompatActivity {
     private Button button_sound;
     private Button button_details;
     private TextView textView_details;
-    private File file_sound;
     private String file_name;
 
     @Override
@@ -71,6 +70,7 @@ public class AnimalPage extends AppCompatActivity {
         });
 
 
+        //switching from map to animal image and vice versa (its a toggle)
         button_map_animal = findViewById(R.id.buttonMapAnimal);
         button_map_animal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +91,7 @@ public class AnimalPage extends AppCompatActivity {
             }
         });
 
+        //sound button
         file_name = iInformation.getString("SOUND");
         int resID = AnimalPage.this.getResources().getIdentifier(file_name,"raw",AnimalPage.this.getPackageName());
         button_sound = findViewById(R.id.buttonSound);
