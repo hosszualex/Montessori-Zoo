@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="login_error">#FF0000</color>
     <color name="black_zoo">#000000</color>
+    <color name="blue">#4349BC</color>
 </resources>

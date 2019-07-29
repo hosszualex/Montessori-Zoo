@@ -31,7 +31,8 @@ public class HomeScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                final Intent mainIntent = new Intent(HomeScreen.this, AnimalsList.class);
+               final Intent mainIntent = new Intent(HomeScreen.this, MapZoo.class);
+                // final Intent mainIntent = new Intent(HomeScreen.this, AnimalsList.class);
                 HomeScreen.this.startActivity(mainIntent);
                 HomeScreen.this.finish();
             }

@@ -66,7 +66,7 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
     @Override
     public AnimalViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-    if(AnimalsList.returnBool()==false)
+    if(AnimalsList.returnViewType()==0)
     {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item, viewGroup, false);
         AnimalViewHolder avh = new AnimalViewHolder(v,mListener);
@@ -74,22 +74,40 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
         return avh;
     }
         else
+            if(AnimalsList.returnViewType()==1)
     {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item_card, viewGroup, false);
         AnimalViewHolder avh_card = new AnimalViewHolder(v,mListener);
 
         return avh_card;
     }
+        else
+            if(AnimalsList.returnViewType()==2)
+            {
+                View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item_grid, viewGroup, false);
+                AnimalViewHolder avh_grid = new AnimalViewHolder(v,mListener);
 
+                return avh_grid;
+            }
 
+    return null;
 }
 
     @Override
     public void onBindViewHolder(@NonNull AnimalViewHolder animalViewHolder, int position) {
+        if(AnimalsList.returnViewType()==0 || AnimalsList.returnViewType()==1)
+        {
         Animal_item currentItem = mAnimalList.get(position);
         animalViewHolder.mImageView.setImageResource(currentItem.getmImageAnimal());
         animalViewHolder.mTitle.setText(currentItem.getmName());
         animalViewHolder.mDesc.setText(currentItem.getmDesc());
+        }
+        else
+            if(AnimalsList.returnViewType()==2)
+            {
+                Animal_item currentItem = mAnimalList.get(position);
+                animalViewHolder.mImageView.setImageResource(currentItem.getmImageAnimal());
+            }
 }
 
     @Override
