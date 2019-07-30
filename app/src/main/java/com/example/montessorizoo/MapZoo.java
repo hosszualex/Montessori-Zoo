@@ -19,6 +19,7 @@ public class MapZoo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_zoo);
 
+
         image_forest = findViewById(R.id.imageForest);
 
         image_forest.setOnClickListener(new View.OnClickListener() {
@@ -26,6 +27,7 @@ public class MapZoo extends AppCompatActivity {
             public void onClick(View v) {
 
                 final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
+                mainIntent.putExtra("FILTER", "Forest");
                 MapZoo.this.startActivity(mainIntent);
             }
         });
@@ -36,6 +38,7 @@ public class MapZoo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
+                mainIntent.putExtra("FILTER", "Ocean");
                 MapZoo.this.startActivity(mainIntent);
             }
         });

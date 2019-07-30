@@ -13,9 +13,10 @@ public class Animal_item {
     private int mImageMap;
     private String mDetails;
     private String mAudioFile;
+    private String mRegion;
 
 
-    public Animal_item(int mImageAnimal, String mName, String mDesc, String mFood, String mFunFacts, int mImageMap, String mDetails, String mAudioFile){
+    public Animal_item(int mImageAnimal, String mName, String mDesc, String mFood, String mFunFacts, int mImageMap, String mDetails, String mAudioFile,String mRegion){
         this.mImageAnimal=mImageAnimal;
         this.mName = mName;
         this.mDesc = mDesc;
@@ -24,7 +25,7 @@ public class Animal_item {
         this.mImageMap = mImageMap;
         this.mDetails = mDetails;
         this.mAudioFile = mAudioFile;
-
+        this.mRegion = mRegion;
 
     }
 
@@ -62,6 +63,10 @@ public class Animal_item {
 
     public String getmAudioFile() {
         return mAudioFile;
+    }
+
+    public String getmRegion() {
+        return mRegion;
     }
 
     public void setmImageAnimal(int mImageAnimal) {
