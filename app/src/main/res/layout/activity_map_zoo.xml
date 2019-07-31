@@ -10,9 +10,7 @@
         android:id="@+id/imageZoo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:src="@drawable/zoo"
-        />
+        android:src="@drawable/zoomap" />
     <ImageView
         android:id="@+id/imageForest"
         android:layout_width="100dp"
@@ -33,6 +31,77 @@
         android:layout_marginLeft="10dp"
 
         />
+    <ImageView
+        android:id="@+id/imageNorthAmerica"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_alignTop="@+id/imageZoo"
+        android:layout_alignLeft="@+id/imageZoo"
+        android:layout_marginTop="215dp"
+        android:layout_marginLeft="65dp"
+        android:background="@drawable/highlight"/>
+
+
+
+    <TextView
+        android:id="@+id/textViewNorthAmerica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imageNorthAmerica"
+        android:layout_alignTop="@+id/imageNorthAmerica"
+        android:layout_alignEnd="@+id/imageNorthAmerica"
+        android:text="North America"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        />
+
+    <ImageView
+        android:id="@+id/imageAfrica"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_alignTop="@+id/imageZoo"
+        android:layout_alignRight="@+id/imageZoo"
+        android:layout_marginTop="180dp"
+        android:layout_marginRight="110dp"
+        android:background="@drawable/highlight"/>
+    <TextView
+        android:id="@+id/textViewAfrica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imageAfrica"
+        android:layout_alignTop="@+id/imageAfrica"
+        android:layout_alignEnd="@+id/imageAfrica"
+        android:text="Africa"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        />
+    <ImageView
+        android:id="@+id/imageJungle"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@+id/imageZoo"
+        android:layout_alignLeft="@+id/imageZoo"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="220dp"
+        android:background="@drawable/highlight"/>
+    <TextView
+        android:id="@+id/textViewJungle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/imageJungle"
+        android:layout_alignTop="@+id/imageJungle"
+        android:layout_alignEnd="@+id/imageJungle"
+        android:text="Jungle"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        />
+
 
 
 </RelativeLayout>

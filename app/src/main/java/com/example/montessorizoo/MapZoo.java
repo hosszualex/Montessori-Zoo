@@ -13,6 +13,9 @@ public class MapZoo extends AppCompatActivity {
 
     ImageView image_forest;
     ImageView image_ocean;
+    ImageView image_northamerica;
+    ImageView image_africa;
+    ImageView image_jungle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,41 @@ public class MapZoo extends AppCompatActivity {
                 MapZoo.this.startActivity(mainIntent);
             }
         });
+
+        image_northamerica = findViewById(R.id.imageNorthAmerica);
+
+        image_northamerica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
+                mainIntent.putExtra("FILTER", "North America");
+                MapZoo.this.startActivity(mainIntent);
+            }
+        });
+
+        image_africa = findViewById(R.id.imageAfrica);
+
+        image_africa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
+                mainIntent.putExtra("FILTER", "Africa");
+                MapZoo.this.startActivity(mainIntent);
+            }
+        });
+
+        image_jungle = findViewById(R.id.imageJungle);
+
+        image_jungle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
+                mainIntent.putExtra("FILTER", "Jungle");
+                MapZoo.this.startActivity(mainIntent);
+
+            }
+        });
+
 
     }
 }
