@@ -23,6 +23,8 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -44,11 +46,10 @@ public class AnimalsList extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
 
-    Button signout;
-    Button changeViewType;
-
     final ArrayList<Animal_item> animalList = new ArrayList<>();
     public static int viewType;
+
+    DatabaseReference databaseAnimals; // for firebase storage of  data
 
     public static final String SHARED_PREFS = "sharedPrefs";
 
@@ -75,6 +76,8 @@ public class AnimalsList extends AppCompatActivity {
         animalList.add(new Animal_item(R.drawable.cougar, "Cougar", "Mammal", "Meat", "They hunt in packs",R.drawable.wolf_map, "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
                 "wolf_sound", "North America"));
 
+
+
     }
 
     public void addToListAfrica(){
@@ -100,6 +103,20 @@ public class AnimalsList extends AppCompatActivity {
                 "wolf_sound", "Jungle"));
     }
 
+    public void addToListOcean(){
+        ArrayList<Animal_item> animal_ocean = new ArrayList<>();
+        animal_ocean.add(new Animal_item(R.drawable.jaguar, "Jaguar", "Mammal", "Meat", "They hunt in packs",R.drawable.wolf_map, "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
+                "wolf_sound", "Ocean"));
+        animal_ocean.add(new Animal_item(R.drawable.jaguar, "FISH", "Mammal", "Meat", "They hunt in packs",R.drawable.wolf_map, "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
+                "wolf_sound", "Ocean"));
+        int i;
+        for(i = 0; i < 2; i++)
+        {
+            databaseAnimals.child(animal_ocean.get(i).getmRegion()).child(animal_ocean.get(i).getmName()).setValue(animal_ocean.get(i));
+        }
+
+    }
+
     public static String getFilter(){
         return region_selected;
     }
@@ -110,6 +127,14 @@ public class AnimalsList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animals_list);
+
+        //firebase testing workspace
+
+        databaseAnimals = FirebaseDatabase.getInstance().getReference("Region");
+        addToListOcean();
+
+
+
 
         addToListNorthAmerica();
         addToListAfrica();

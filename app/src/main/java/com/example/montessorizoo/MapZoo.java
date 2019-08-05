@@ -11,40 +11,17 @@ import java.util.Map;
 
 public class MapZoo extends AppCompatActivity {
 
-    ImageView image_forest;
-    ImageView image_ocean;
+
     ImageView image_northamerica;
     ImageView image_africa;
     ImageView image_jungle;
+    ImageView image_ocean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_zoo);
 
-
-        image_forest = findViewById(R.id.imageForest);
-
-        image_forest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
-                mainIntent.putExtra("FILTER", "Forest");
-                MapZoo.this.startActivity(mainIntent);
-            }
-        });
-
-        image_ocean = findViewById(R.id.imageOcean);
-
-        image_ocean.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
-                mainIntent.putExtra("FILTER", "Ocean");
-                MapZoo.this.startActivity(mainIntent);
-            }
-        });
 
         image_northamerica = findViewById(R.id.imageNorthAmerica);
 
@@ -77,6 +54,17 @@ public class MapZoo extends AppCompatActivity {
                 mainIntent.putExtra("FILTER", "Jungle");
                 MapZoo.this.startActivity(mainIntent);
 
+            }
+        });
+
+        image_ocean = findViewById(R.id.imageOcean);
+
+        image_ocean.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
+                mainIntent.putExtra("FILTER", "Ocean");
+                MapZoo.this.startActivity(mainIntent);
             }
         });
 
