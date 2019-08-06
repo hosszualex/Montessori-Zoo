@@ -3,6 +3,7 @@ package com.example.montessorizoo;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,8 +24,11 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -62,23 +66,34 @@ public class AnimalsList extends AppCompatActivity {
         info.putExtra("CLASS", animalList.get(p).getmDesc());
         info.putExtra("FOOD", animalList.get(p).getmFood());
         info.putExtra("FACTS", animalList.get(p).getmFunFacts());
-        info.putExtra("IMAGE", animalList.get(p).getmImageAnimal());
+        //info.putExtra("IMAGE", animalList.get(p).getmImageAnimal());
         info.putExtra("MAP", animalList.get(p).getmImageMap());
         info.putExtra("DETAIL", animalList.get(p).getmDetails());
         info.putExtra("SOUND", animalList.get(p).getmAudioFile());
     }
 
     public void addToListNorthAmerica (){
-        animalList.add(new Animal_item(R.drawable.wolf, "Wolf", "Mammal", "Meat", "They hunt in packs",R.drawable.wolf_map, "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
+        animalList.add(new Animal_item("https://www.wolf.org/wp-content/uploads/2019/04/5D3_3666.jpg",
+                "Wolf", "Mammal", "Meat", "They hunt in packs",
+                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
+                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
                 "wolf_sound", "North America"));
-        animalList.add(new Animal_item(R.drawable.moose, "Moose", "Mammal", "Meat", "They hunt in packs",R.drawable.wolf_map, "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
+        animalList.add(new Animal_item("https://cdn.pixabay.com/photo/2014/07/08/12/38/mammal-386740__340.jpg",
+                "Moose", "Mammal", "Meat", "They hunt in packs",
+                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
+                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
                 "wolf_sound", "North America"));
-        animalList.add(new Animal_item(R.drawable.cougar, "Cougar", "Mammal", "Meat", "They hunt in packs",R.drawable.wolf_map, "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
+        animalList.add(new Animal_item("https://i.cbc.ca/1.4689926.1553908134!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_780/cougar-stock.jpg",
+                "Cougar", "Mammal", "Meat", "They hunt in packs",
+                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
+                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
                 "wolf_sound", "North America"));
+
 
 
 
     }
+/*
 
     public void addToListAfrica(){
         animalList.add(new Animal_item(R.drawable.lion, "Lion", "Mammal", "Meat", "They hunt in packs",R.drawable.wolf_map, "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
@@ -102,20 +117,27 @@ public class AnimalsList extends AppCompatActivity {
         animalList.add(new Animal_item(R.drawable.jaguar, "Jaguar", "Mammal", "Meat", "They hunt in packs",R.drawable.wolf_map, "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
                 "wolf_sound", "Jungle"));
     }
-
+*/
     public void addToListOcean(){
         ArrayList<Animal_item> animal_ocean = new ArrayList<>();
-        animal_ocean.add(new Animal_item(R.drawable.jaguar, "Jaguar", "Mammal", "Meat", "They hunt in packs",R.drawable.wolf_map, "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
+        animal_ocean.add(new Animal_item("https://cdn.pixabay.com/photo/2016/12/31/21/22/discus-fish-1943755__340.jpg",
+                "Jaguar", "Mammal", "Meat", "They hunt in packs",
+                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
+                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
                 "wolf_sound", "Ocean"));
-        animal_ocean.add(new Animal_item(R.drawable.jaguar, "FISH", "Mammal", "Meat", "They hunt in packs",R.drawable.wolf_map, "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
+        animal_ocean.add(new Animal_item("https://image.shutterstock.com/image-photo/image-450w-580306465.jpg",
+                "FISH", "Mammal", "Meat", "They hunt in packs",
+                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
+                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
                 "wolf_sound", "Ocean"));
-        int i;
-        for(i = 0; i < 2; i++)
+
+        for(int i = 0; i < 2; i++)
         {
             databaseAnimals.child(animal_ocean.get(i).getmRegion()).child(animal_ocean.get(i).getmName()).setValue(animal_ocean.get(i));
         }
 
     }
+
 
     public static String getFilter(){
         return region_selected;
@@ -128,17 +150,38 @@ public class AnimalsList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animals_list);
 
-        //firebase testing workspace
-
+        //firebase uploading info testing
         databaseAnimals = FirebaseDatabase.getInstance().getReference("Region");
         addToListOcean();
+
+        databaseAnimals.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot animalSnapshot : dataSnapshot.getChildren()){
+
+                   Animal_item animal = animalSnapshot.getValue(Animal_item.class);
+                    animalList.add(animal);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
 
 
 
         addToListNorthAmerica();
+/*
         addToListAfrica();
         addToListJungle();
+*/
 
         //get the filter
         Intent iFilter = getIntent();
@@ -348,4 +391,6 @@ public class AnimalsList extends AppCompatActivity {
         }
 
     }
+
+
 }

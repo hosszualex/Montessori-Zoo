@@ -1,40 +1,40 @@
 package com.example.montessorizoo;
 
-import android.media.MediaPlayer;
-import android.provider.MediaStore;
+import android.widget.ImageView;
 
 public class Animal_item {
 
-    private int mImageAnimal;
+    private String mImageAnimalURL;
     private String mName;
     private String mDesc;
     private String mFood;
     private String mFunFacts;
-    private int mImageMap;
+    private String mImageMapURL;
     private String mDetails;
     private String mAudioFile;
     private String mRegion;
 
 
-    public Animal_item(int mImageAnimal, String mName, String mDesc, String mFood, String mFunFacts, int mImageMap, String mDetails, String mAudioFile,String mRegion){
-        this.mImageAnimal=mImageAnimal;
+    public Animal_item(String mImageAnimal, String mName, String mDesc, String mFood, String mFunFacts, String mImageMap, String mDetails, String mAudioFile,String mRegion){
+        this.mImageAnimalURL=mImageAnimal;
         this.mName = mName;
         this.mDesc = mDesc;
         this.mFood = mFood;
         this.mFunFacts = mFunFacts;
-        this.mImageMap = mImageMap;
+        this.mImageMapURL = mImageMap;
         this.mDetails = mDetails;
         this.mAudioFile = mAudioFile;
         this.mRegion = mRegion;
 
     }
+    public Animal_item(){};
 
     public void changeText1(String text){
         mName = text;
     }
 
-    public int getmImageAnimal(){
-        return mImageAnimal;
+    public String getmImageAnimalURL(){
+        return mImageAnimalURL;
     }
 
     public String getmName() {
@@ -53,8 +53,8 @@ public class Animal_item {
         return mFunFacts;
     }
 
-    public int getmImageMap() {
-        return mImageMap;
+    public String getmImageMap() {
+        return mImageMapURL;
     }
 
     public String getmDetails() {
@@ -69,8 +69,10 @@ public class Animal_item {
         return mRegion;
     }
 
-    public void setmImageAnimal(int mImageAnimal) {
-        this.mImageAnimal = mImageAnimal;
+
+
+    public void setmImageAnimalURL(String mImageAnimal) {
+        this.mImageAnimalURL = mImageAnimal;
     }
 
     public void setmName(String mName) {

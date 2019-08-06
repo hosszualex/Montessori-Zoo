@@ -1,5 +1,6 @@
 package com.example.montessorizoo;
 
+import android.content.Context;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -37,6 +40,8 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
     public ImageView mImageView;
     public TextView mTitle;
     public TextView mDesc;
+    Context context;
+
 
 
         public AnimalViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
@@ -104,15 +109,24 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
         if(AnimalsList.returnViewType()==0 || AnimalsList.returnViewType()==1)
         {
             Animal_item currentItem = mAnimalList.get(position);
-            animalViewHolder.mImageView.setImageResource(currentItem.getmImageAnimal());
         animalViewHolder.mTitle.setText(currentItem.getmName());
         animalViewHolder.mDesc.setText(currentItem.getmDesc());
+        Picasso.get().load(currentItem.getmImageAnimalURL()).into(animalViewHolder.mImageView);
+
+       // currentItem.setmImageAnimal(animalViewHolder.mImageView.getDrawable());
+        //currentItem.setmImageAnimal(animalViewHolder.mImageView.);
+       // currentItem.setmImageAnimal(Integer.parseInt(animalViewHolder.mImageView.getTag().toString()));
+            //animalViewHolder.mImageView.setImageResource(currentItem.getmImageAnimal());
         }
         else
             if(AnimalsList.returnViewType()==2)
             {
                 Animal_item currentItem = mAnimalList.get(position);
-                animalViewHolder.mImageView.setImageResource(currentItem.getmImageAnimal());
+                Picasso.get().load(currentItem.getmImageAnimalURL()).into(animalViewHolder.mImageView);
+
+               // currentItem.setmImageAnimal(animalViewHolder.mImageView.getDrawable());
+                // currentItem.setmImageAnimal(Integer.parseInt(animalViewHolder.mImageView.getTag().toString()));
+                // animalViewHolder.mImageView.setImageResource(currentItem.getmImageAnimal());
             }
 
 

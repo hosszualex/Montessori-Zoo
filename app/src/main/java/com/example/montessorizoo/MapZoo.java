@@ -1,12 +1,19 @@
 package com.example.montessorizoo;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Map;
 
 public class MapZoo extends AppCompatActivity {
@@ -16,6 +23,10 @@ public class MapZoo extends AppCompatActivity {
     ImageView image_africa;
     ImageView image_jungle;
     ImageView image_ocean;
+
+    ImageView TEST;
+    Bitmap bitmap;
+    String URL = "https://s7img.ftdi.com/is/image/ProvideCommerce/PF_19_R299_LAY_SHP_V2?$proflowers-tile-wide-mv-new$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,5 +80,11 @@ public class MapZoo extends AppCompatActivity {
         });
 
 
+        TEST = findViewById(R.id.TEST);
+
+
+
     }
+
+
 }
