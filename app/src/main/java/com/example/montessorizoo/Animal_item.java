@@ -53,7 +53,7 @@ public class Animal_item {
         return mFunFacts;
     }
 
-    public String getmImageMap() {
+    public String getmImageMapURL() {
         return mImageMapURL;
     }
 

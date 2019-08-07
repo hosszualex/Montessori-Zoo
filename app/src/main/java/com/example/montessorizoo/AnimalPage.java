@@ -12,6 +12,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.w3c.dom.Text;
 
 import java.io.File;
@@ -28,6 +30,7 @@ public class AnimalPage extends AppCompatActivity {
     private Button button_details;
     private TextView textView_details;
     private String file_name;
+    private String imageURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,9 @@ public class AnimalPage extends AppCompatActivity {
         textView_facts.setText(iInformation.getString("FACTS"));
 
         imageView_item = findViewById(R.id.image_item);
-        imageView_item.setImageResource(iInformation.getInt("IMAGE"));
+
+        imageURL = iInformation.getString("IMAGE_URL");
+        Picasso.get().load(imageURL).into(imageView_item);
 
 
         button_details = findViewById(R.id.buttonDetail);
@@ -79,11 +84,13 @@ public class AnimalPage extends AppCompatActivity {
                 button_map_animal.setSelected(!button_map_animal.isSelected());
 
                 if (button_map_animal.isSelected()) {
-                    imageView_item.setImageResource(iInformation.getInt("MAP"));
+                    String url = iInformation.getString("MAP_URL");
+                    Picasso.get().load(url).into(imageView_item);
                     button_map_animal.setText("Animal");
                 }
                 else {
-                    imageView_item.setImageResource(iInformation.getInt("IMAGE"));
+                    String url = iInformation.getString("IMAGE_URL");
+                    Picasso.get().load(url).into(imageView_item);
                     button_map_animal.setText("Map");
 
                 }

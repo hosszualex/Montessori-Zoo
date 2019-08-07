@@ -113,20 +113,12 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
         animalViewHolder.mDesc.setText(currentItem.getmDesc());
         Picasso.get().load(currentItem.getmImageAnimalURL()).into(animalViewHolder.mImageView);
 
-       // currentItem.setmImageAnimal(animalViewHolder.mImageView.getDrawable());
-        //currentItem.setmImageAnimal(animalViewHolder.mImageView.);
-       // currentItem.setmImageAnimal(Integer.parseInt(animalViewHolder.mImageView.getTag().toString()));
-            //animalViewHolder.mImageView.setImageResource(currentItem.getmImageAnimal());
         }
         else
             if(AnimalsList.returnViewType()==2)
             {
                 Animal_item currentItem = mAnimalList.get(position);
                 Picasso.get().load(currentItem.getmImageAnimalURL()).into(animalViewHolder.mImageView);
-
-               // currentItem.setmImageAnimal(animalViewHolder.mImageView.getDrawable());
-                // currentItem.setmImageAnimal(Integer.parseInt(animalViewHolder.mImageView.getTag().toString()));
-                // animalViewHolder.mImageView.setImageResource(currentItem.getmImageAnimal());
             }
 
 
