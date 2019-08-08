@@ -1,10 +1,16 @@
 package com.example.montessorizoo;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,12 +22,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
 import android.text.Layout;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +40,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class AnimalsList extends AppCompatActivity {
 
@@ -43,6 +53,7 @@ public class AnimalsList extends AppCompatActivity {
     final SnapHelper helperVertical = new LinearSnapHelper();
     private Menu menu;
 
+    private AnimalsListViewModel mAnimalsListViewModel;
 
     private static String region_selected;
 
@@ -51,7 +62,7 @@ public class AnimalsList extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
 
-    final ArrayList<Animal_item> animalList = new ArrayList<>();
+    private List<Animal_item> animalList = new ArrayList<>();
     public static int viewType;
 
     DatabaseReference databaseAnimals; // for firebase storage of  data
@@ -61,6 +72,7 @@ public class AnimalsList extends AppCompatActivity {
     public static int returnViewType () {
         return viewType;
     }
+
 
     public void sendInfoIntent(Intent info, int p){
         info.putExtra("NAME", animalList.get(p).getmName());
@@ -73,68 +85,6 @@ public class AnimalsList extends AppCompatActivity {
         info.putExtra("SOUND", animalList.get(p).getmAudioFile());
     }
 
-    public void addToListNorthAmerica (){
-        animalList.add(new Animal_item("https://www.wolf.org/wp-content/uploads/2019/04/5D3_3666.jpg",
-                "Wolf", "Mammal", "Meat", "They hunt in packs",
-                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
-                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
-                "wolf_sound", "North America"));
-        animalList.add(new Animal_item("https://cdn.pixabay.com/photo/2014/07/08/12/38/mammal-386740__340.jpg",
-                "Moose", "Mammal", "Meat", "They hunt in packs",
-                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
-                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
-                "wolf_sound", "North America"));
-        animalList.add(new Animal_item("https://i.cbc.ca/1.4689926.1553908134!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_780/cougar-stock.jpg",
-                "Cougar", "Mammal", "Meat", "They hunt in packs",
-                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
-                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
-                "wolf_sound", "North America"));
-
-
-
-
-    }
-
-
-    public void addToListAfrica(){
-        animalList.add(new Animal_item("https://media.istockphoto.com/photos/lion-panthera-leo-10-years-old-isolated-on-white-picture-id877369086?k=6&m=877369086&s=612x612&w=0&h=0BMW4rBBkmoiU0MdMEHN7Qk_lHatvMTeOcdsJHWV8-M=",
-                "Lion", "Mammal", "Meat", "They hunt in packs",
-                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
-                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
-                "wolf_sound", "Africa"));
-        animalList.add(new Animal_item("https://media.istockphoto.com/photos/lion-panthera-leo-10-years-old-isolated-on-white-picture-id877369086?k=6&m=877369086&s=612x612&w=0&h=0BMW4rBBkmoiU0MdMEHN7Qk_lHatvMTeOcdsJHWV8-M=",
-                "Lion", "Mammal", "Meat", "They hunt in packs",
-                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
-                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
-                "wolf_sound", "Africa"));
-        animalList.add(new Animal_item("https://media.istockphoto.com/photos/lion-panthera-leo-10-years-old-isolated-on-white-picture-id877369086?k=6&m=877369086&s=612x612&w=0&h=0BMW4rBBkmoiU0MdMEHN7Qk_lHatvMTeOcdsJHWV8-M=",
-                "Lion", "Mammal", "Meat", "They hunt in packs",
-                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
-                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
-                "wolf_sound", "Africa"));
-
-    }
-
-    public void addToListJungle(){
-        animalList.add(new Animal_item("https://images.pexels.com/photos/1463295/pexels-photo-1463295.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                "Parrot", "Mammal", "Meat", "They hunt in packs",
-                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
-                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
-                "wolf_sound", "Jungle"));
-        animalList.add(new Animal_item("https://images.pexels.com/photos/1463295/pexels-photo-1463295.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                "Parrot", "Mammal", "Meat", "They hunt in packs",
-                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
-                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
-                "wolf_sound", "Jungle"));
-        animalList.add(new Animal_item("https://images.pexels.com/photos/1463295/pexels-photo-1463295.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                "Parrot", "Mammal", "Meat", "They hunt in packs",
-                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
-                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
-                "wolf_sound", "Jungle"));
-    }
-
-
-
     public static String getFilter(){
         return region_selected;
     }
@@ -146,20 +96,50 @@ public class AnimalsList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animals_list);
 
-        addToListNorthAmerica();
+
+        databaseAnimals = FirebaseDatabase.getInstance().getReference("Region").child("Animal");
+
+
+        //view model
+        mAnimalsListViewModel = ViewModelProviders.of(AnimalsList.this).get(AnimalsListViewModel.class);
+        mAnimalsListViewModel.init();
+        animalList = mAnimalsListViewModel.getAnimal_item().getValue() ;
+
+        mAnimalsListViewModel.getAnimal_item().observe(this, new Observer<List<Animal_item>>() {
+            @Override
+            public void onChanged(@Nullable List<Animal_item> animal_items) {
+            mAdapter.notifyDataSetChanged();
+
+
+
+            }
+        });
+
+
+
+/*
+        for(int i=0;i<animalList.size();i++){
+            String id = databaseAnimals.push().getKey();
+            databaseAnimals.child(id).setValue(animalList.get(i));
+
+        }
+*/
+
+
+/*        addToListNorthAmerica();
         addToListAfrica();
-        addToListJungle();
+        addToListJungle();*/
 
 
         //get the filter
         Intent iFilter = getIntent();
         region_selected = iFilter.getStringExtra("FILTER");
 
+        mAdapter = new AnimalAdapter(animalList);
         mRecyclerView = findViewById(R.id.recyclerView_list);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager_Vertical = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mLayoutManager_Horizontal = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mAdapter = new AnimalAdapter(animalList);
 
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);

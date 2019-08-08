@@ -1,30 +1,28 @@
 package com.example.montessorizoo;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalViewHolder> implements Filterable {
-    private List<Animal_item> mAnimalList;
-    private List<Animal_item> mAnimalListFull;
+    private List<Animal_item> mAnimalList = new ArrayList<>();
+    private List<Animal_item> mAnimalListFull = new ArrayList<>();
 
     private OnItemClickListener mListener;
+
 
     public interface OnItemClickListener{
         void onItemClick(int position);
@@ -65,11 +63,6 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
 
         }
     }
-
-        public  AnimalAdapter(ArrayList<Animal_item> animalList){
-            mAnimalList = animalList;
-            mAnimalListFull = new ArrayList<>(animalList);
-        }
 
 
     @NonNull
@@ -124,6 +117,14 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
 
 
     }
+
+    public AnimalAdapter(List<Animal_item> animalList){
+
+        mAnimalList = animalList;
+        mAnimalListFull = new ArrayList<>(animalList);
+
+    }
+
 
     @Override
     public int getItemCount() {
