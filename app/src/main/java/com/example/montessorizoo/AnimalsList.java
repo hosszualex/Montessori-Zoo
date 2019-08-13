@@ -1,5 +1,6 @@
 package com.example.montessorizoo;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
@@ -63,7 +64,7 @@ public class AnimalsList extends AppCompatActivity {
     FirebaseUser firebaseUser;
 
     private List<Animal_item> animalList = new ArrayList<>();
-    public static int viewType;
+    public static Integer viewType;
 
     DatabaseReference databaseAnimals; // for firebase storage of  data
 
@@ -74,36 +75,91 @@ public class AnimalsList extends AppCompatActivity {
     }
 
 
-    public void sendInfoIntent(Intent info, int p){
-        info.putExtra("NAME", animalList.get(p).getmName());
-        info.putExtra("CLASS", animalList.get(p).getmDesc());
-        info.putExtra("FOOD", animalList.get(p).getmFood());
-        info.putExtra("FACTS", animalList.get(p).getmFunFacts());
-        info.putExtra("IMAGE_URL", animalList.get(p).getmImageAnimalURL());
-        info.putExtra("MAP_URL", animalList.get(p).getmImageMapURL());
-        info.putExtra("DETAIL", animalList.get(p).getmDetails());
-        info.putExtra("SOUND", animalList.get(p).getmAudioFile());
+    public void sendInfoIntent(Intent info, int p, List<Animal_item> animal){
+        info.putExtra("NAME", animal.get(p).getmName());
+        info.putExtra("CLASS", animal.get(p).getmDesc());
+        info.putExtra("FOOD", animal.get(p).getmFood());
+        info.putExtra("FACTS", animal.get(p).getmFunFacts());
+        info.putExtra("IMAGE_URL", animal.get(p).getmImageAnimalURL());
+        info.putExtra("MAP_URL", animal.get(p).getmImageMapURL());
+        info.putExtra("DETAIL", animal.get(p).getmDetails());
+        info.putExtra("SOUND", animal.get(p).getmAudioFile());
     }
 
-    public static String getFilter(){
-        return region_selected;
-    }
 
+    public Observer<Integer> onGetViewType = view -> {
+        viewType = view;
+        if(viewType == 0){
+            mAdapter = new AnimalAdapter(animalList);
+            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setLayoutManager(mLayoutManager_Vertical);
+            helperHorizontal.attachToRecyclerView(null);
+            helperVertical.attachToRecyclerView(null);
+            helperVertical.attachToRecyclerView(mRecyclerView);
+        }
+        else
+        if(viewType == 1){
+            mAdapter = new AnimalAdapter(animalList);
+            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setLayoutManager(mLayoutManager_Horizontal);
+            helperHorizontal.attachToRecyclerView(null);
+            helperVertical.attachToRecyclerView(null);
+            helperHorizontal.attachToRecyclerView(mRecyclerView);
+        }
+        else
+        if(viewType == 2){
+            mAdapter = new AnimalAdapter(animalList);
+            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setLayoutManager(new GridLayoutManager(this,1));
+            helperHorizontal.attachToRecyclerView(null);
+            helperVertical.attachToRecyclerView(null);
+            helperVertical.attachToRecyclerView(mRecyclerView);
+
+        }
+    };
 
     public Observer <List<Animal_item>> onGetAnimalList = animal -> {
 
-        mAdapter = new AnimalAdapter(animal);
-        mRecyclerView.setAdapter(mAdapter);
+
+        viewType = mAnimalsListViewModel.getViewType().getValue();
+
+        if(viewType == 0){
+            mAdapter = new AnimalAdapter(animal);
+            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setLayoutManager(mLayoutManager_Vertical);
+            helperHorizontal.attachToRecyclerView(null);
+            helperVertical.attachToRecyclerView(null);
+            helperVertical.attachToRecyclerView(mRecyclerView);
+        }
+        else
+            if(viewType == 1){
+                mAdapter = new AnimalAdapter(animal);
+                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView.setLayoutManager(mLayoutManager_Horizontal);
+                helperHorizontal.attachToRecyclerView(null);
+                helperVertical.attachToRecyclerView(null);
+                helperHorizontal.attachToRecyclerView(mRecyclerView);
+            }
+            else
+                if(viewType == 2){
+                    mAdapter = new AnimalAdapter(animal);
+                    mRecyclerView.setAdapter(mAdapter);
+                    mRecyclerView.setLayoutManager(new GridLayoutManager(this,1));
+                    helperHorizontal.attachToRecyclerView(null);
+                    helperVertical.attachToRecyclerView(null);
+                    helperVertical.attachToRecyclerView(mRecyclerView);
+
+                }
+
         mAdapter.getFilter().filter(region_selected);
         mAdapter.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
             @Override
             public void onItemClick(int position) {
                 final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
-                sendInfoIntent(animalpageIntent, position);
+                sendInfoIntent(animalpageIntent, position, animal);
                 startActivity(animalpageIntent);
             }
         });
-
 
     };
 
@@ -119,7 +175,10 @@ public class AnimalsList extends AppCompatActivity {
 
         //view model
         mAnimalsListViewModel = ViewModelProviders.of(AnimalsList.this).get(AnimalsListViewModel.class);
-        mAnimalsListViewModel.init();
+        mAnimalsListViewModel.init_animals();
+        mAnimalsListViewModel.init_view();
+        animalList = mAnimalsListViewModel.getAnimal_item().getValue();
+
 /*
         animalList = mAnimalsListViewModel.getAnimal_item().getValue() ;
 */
@@ -192,11 +251,12 @@ public class AnimalsList extends AppCompatActivity {
 
     public void connectViewModel(){
         mAnimalsListViewModel.getAnimal_item().observe(this, onGetAnimalList);
-
+        mAnimalsListViewModel.getViewType().observe(this,onGetViewType);
     }
 
     public void disconnectViewModel(){
         mAnimalsListViewModel.getAnimal_item().removeObserver(onGetAnimalList);
+        mAnimalsListViewModel.getViewType().removeObserver(onGetViewType);
 
     }
 
@@ -238,24 +298,7 @@ public class AnimalsList extends AppCompatActivity {
             case R.id.item_layoutswitch:
                 if(viewType==0)//if its list layout, transform to next layout
                 {
-                    AnimalAdapter mAdapter_change;
-                    mAdapter_change = new AnimalAdapter(animalList);
-                    mRecyclerView.setLayoutManager(mLayoutManager_Horizontal);
-                    mRecyclerView.setAdapter(mAdapter_change);
-                    viewType = 1;
-                    mAdapter_change.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
-                        @Override
-                        public void onItemClick(int position) {
-                            final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
-                            sendInfoIntent(animalpageIntent, position);
-                            startActivity(animalpageIntent);
-                        }
-                    });
-
-                    //needs to put the previous snaphelper to null, in order for conflict to not appear
-                    helperHorizontal.attachToRecyclerView(null);
-                    helperVertical.attachToRecyclerView(null);
-                    helperHorizontal.attachToRecyclerView(mRecyclerView);
+                    mAnimalsListViewModel.setViewType(1);
 
                     menu.getItem(1).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_gridlayout));
 
@@ -269,24 +312,8 @@ public class AnimalsList extends AppCompatActivity {
                 else
                 if(viewType==1) //if its in card layout, transform to next layout
                 {
-                    AnimalAdapter mAdapter_change;
-                    mAdapter_change = new AnimalAdapter(animalList);
-                    mRecyclerView.setLayoutManager(new GridLayoutManager(this,1));
-                    mRecyclerView.setAdapter(mAdapter_change);
-                    viewType = 2;
-                    mAdapter_change.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
-                        @Override
-                        public void onItemClick(int position) {
-                            final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
-                            sendInfoIntent(animalpageIntent, position);
-                            startActivity(animalpageIntent);
-                        }
-                    });
+                    mAnimalsListViewModel.setViewType(2);
 
-                    //needs to put the previous snaphelper to null, in order for conflict to not appear
-                    helperHorizontal.attachToRecyclerView(null);
-                    helperVertical.attachToRecyclerView(null);
-                    helperVertical.attachToRecyclerView(mRecyclerView);
 
                     menu.getItem(1).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_listlayout));
 
@@ -302,24 +329,8 @@ public class AnimalsList extends AppCompatActivity {
                 else
                     if(viewType==2)//if its in grid layout, transform to next layout
                     {
-                        AnimalAdapter mAdapter_change;
-                        mAdapter_change = new AnimalAdapter(animalList);
-                        mRecyclerView.setLayoutManager(mLayoutManager_Vertical);
-                        mRecyclerView.setAdapter(mAdapter_change);
-                        viewType = 0;
-                        mAdapter_change.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
-                            @Override
-                            public void onItemClick(int position) {
-                                final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
-                                sendInfoIntent(animalpageIntent, position);
-                                startActivity(animalpageIntent);
-                            }
-                        });
 
-                        //needs to put the previous snaphelper to null, in order for conflict to not appear
-                        helperHorizontal.attachToRecyclerView(null);
-                        helperVertical.attachToRecyclerView(null);
-                        helperVertical.attachToRecyclerView(mRecyclerView);
+                        mAnimalsListViewModel.setViewType(0);
 
                         menu.getItem(1).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_cardlayout));
 

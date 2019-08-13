@@ -1,12 +1,8 @@
 package com.example.montessorizoo;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +12,6 @@ public class Animal_itemRepository {
     DatabaseReference databaseAnimals; // for firebase storage of  data
     private static Animal_itemRepository instance;
     private ArrayList<Animal_item> dataSet = new ArrayList<>();
-
 
 
     public MutableLiveData<List<Animal_item>> getAnimal_item() {
@@ -36,10 +31,8 @@ public class Animal_itemRepository {
         addToListNorthAmerica();
 
     }
-    private void uploadToFirebase(){
 
 
-    }
 
     public void addToListNorthAmerica() {
         dataSet.add(new Animal_item("https://www.wolf.org/wp-content/uploads/2019/04/5D3_3666.jpg",
