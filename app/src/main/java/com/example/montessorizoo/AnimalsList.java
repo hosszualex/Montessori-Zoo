@@ -90,6 +90,23 @@ public class AnimalsList extends AppCompatActivity {
     }
 
 
+    public Observer <List<Animal_item>> onGetAnimalList = animal -> {
+
+        mAdapter = new AnimalAdapter(animal);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.getFilter().filter(region_selected);
+        mAdapter.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
+            @Override
+            public void onItemClick(int position) {
+                final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
+                sendInfoIntent(animalpageIntent, position);
+                startActivity(animalpageIntent);
+            }
+        });
+
+
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,17 +120,10 @@ public class AnimalsList extends AppCompatActivity {
         //view model
         mAnimalsListViewModel = ViewModelProviders.of(AnimalsList.this).get(AnimalsListViewModel.class);
         mAnimalsListViewModel.init();
+/*
         animalList = mAnimalsListViewModel.getAnimal_item().getValue() ;
+*/
 
-        mAnimalsListViewModel.getAnimal_item().observe(this, new Observer<List<Animal_item>>() {
-            @Override
-            public void onChanged(@Nullable List<Animal_item> animal_items) {
-            mAdapter.notifyDataSetChanged();
-
-
-
-            }
-        });
 
 
 
@@ -126,16 +136,11 @@ public class AnimalsList extends AppCompatActivity {
 */
 
 
-/*        addToListNorthAmerica();
-        addToListAfrica();
-        addToListJungle();*/
-
 
         //get the filter
         Intent iFilter = getIntent();
         region_selected = iFilter.getStringExtra("FILTER");
 
-        mAdapter = new AnimalAdapter(animalList);
         mRecyclerView = findViewById(R.id.recyclerView_list);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager_Vertical = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -161,8 +166,7 @@ public class AnimalsList extends AppCompatActivity {
 
 
 
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.getFilter().filter(region_selected); // calling the filter
+ // calling the filter
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -173,14 +177,7 @@ public class AnimalsList extends AppCompatActivity {
 
 
         //clicking on an item from the list
-        mAdapter.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
-            @Override
-            public void onItemClick(int position) {
-                final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
-                sendInfoIntent(animalpageIntent, position);
-                startActivity(animalpageIntent);
-            }
-        });
+
 
 
 
@@ -192,6 +189,28 @@ public class AnimalsList extends AppCompatActivity {
 
     }
 
+
+    public void connectViewModel(){
+        mAnimalsListViewModel.getAnimal_item().observe(this, onGetAnimalList);
+
+    }
+
+    public void disconnectViewModel(){
+        mAnimalsListViewModel.getAnimal_item().removeObserver(onGetAnimalList);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        connectViewModel();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        disconnectViewModel();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
