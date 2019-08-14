@@ -1,20 +1,12 @@
 package com.example.montessorizoo;
 
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
@@ -22,23 +14,13 @@ import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,19 +45,19 @@ public class AnimalsList extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
 
-    private List<Animal_item> animalList = new ArrayList<>();
-    public static Integer viewType;
+    private List<Animal> animalList = new ArrayList<>();
+    public static int viewType;
 
     DatabaseReference databaseAnimals; // for firebase storage of  data
 
     public static final String SHARED_PREFS = "sharedPrefs";
 
-    public static int returnViewType () {
+    public static int returnViewType() {
         return viewType;
     }
 
 
-    public void sendInfoIntent(Intent info, int p, List<Animal_item> animal){
+    public void sendInfoIntent(Intent info, int p, List<Animal> animal) {
         info.putExtra("NAME", animal.get(p).getmName());
         info.putExtra("CLASS", animal.get(p).getmDesc());
         info.putExtra("FOOD", animal.get(p).getmFood());
@@ -89,67 +71,67 @@ public class AnimalsList extends AppCompatActivity {
 
     public Observer<Integer> onGetViewType = view -> {
         viewType = view;
-        if(viewType == 0){
+        helperHorizontal.attachToRecyclerView(null);
+        helperVertical.attachToRecyclerView(null);
+        if (viewType == 0) {
             mAdapter = new AnimalAdapter(animalList);
             mRecyclerView.setAdapter(mAdapter);
             mRecyclerView.setLayoutManager(mLayoutManager_Vertical);
-            helperHorizontal.attachToRecyclerView(null);
-            helperVertical.attachToRecyclerView(null);
             helperVertical.attachToRecyclerView(mRecyclerView);
-        }
-        else
-        if(viewType == 1){
+        } else if (viewType == 1) {
             mAdapter = new AnimalAdapter(animalList);
             mRecyclerView.setAdapter(mAdapter);
             mRecyclerView.setLayoutManager(mLayoutManager_Horizontal);
-            helperHorizontal.attachToRecyclerView(null);
-            helperVertical.attachToRecyclerView(null);
             helperHorizontal.attachToRecyclerView(mRecyclerView);
-        }
-        else
-        if(viewType == 2){
+        } else if (viewType == 2) {
             mAdapter = new AnimalAdapter(animalList);
-            mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.setLayoutManager(new GridLayoutManager(this,1));
-            helperHorizontal.attachToRecyclerView(null);
-            helperVertical.attachToRecyclerView(null);
+            mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
             helperVertical.attachToRecyclerView(mRecyclerView);
 
         }
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.getFilter().filter(region_selected);
+        mAdapter.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
+            @Override
+            public void onItemClick(int position) {
+                final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
+                sendInfoIntent(animalpageIntent, position, animalList);
+                startActivity(animalpageIntent);
+            }
+        });
+
+
     };
 
-    public Observer <List<Animal_item>> onGetAnimalList = animal -> {
+    public Observer<List<Animal>> onGetAnimalList = animal -> {
 
 
         viewType = mAnimalsListViewModel.getViewType().getValue();
 
-        if(viewType == 0){
+        if (viewType == 0) {
             mAdapter = new AnimalAdapter(animal);
             mRecyclerView.setAdapter(mAdapter);
             mRecyclerView.setLayoutManager(mLayoutManager_Vertical);
             helperHorizontal.attachToRecyclerView(null);
             helperVertical.attachToRecyclerView(null);
             helperVertical.attachToRecyclerView(mRecyclerView);
-        }
-        else
-            if(viewType == 1){
-                mAdapter = new AnimalAdapter(animal);
-                mRecyclerView.setAdapter(mAdapter);
-                mRecyclerView.setLayoutManager(mLayoutManager_Horizontal);
-                helperHorizontal.attachToRecyclerView(null);
-                helperVertical.attachToRecyclerView(null);
-                helperHorizontal.attachToRecyclerView(mRecyclerView);
-            }
-            else
-                if(viewType == 2){
-                    mAdapter = new AnimalAdapter(animal);
-                    mRecyclerView.setAdapter(mAdapter);
-                    mRecyclerView.setLayoutManager(new GridLayoutManager(this,1));
-                    helperHorizontal.attachToRecyclerView(null);
-                    helperVertical.attachToRecyclerView(null);
-                    helperVertical.attachToRecyclerView(mRecyclerView);
+        } else if (viewType == 1) {
+            mAdapter = new AnimalAdapter(animal);
+            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setLayoutManager(mLayoutManager_Horizontal);
+            helperHorizontal.attachToRecyclerView(null);
+            helperVertical.attachToRecyclerView(null);
+            helperHorizontal.attachToRecyclerView(mRecyclerView);
+        } else if (viewType == 2) {
+            mAdapter = new AnimalAdapter(animal);
+            mRecyclerView.setAdapter(mAdapter);
+            mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+            helperHorizontal.attachToRecyclerView(null);
+            helperVertical.attachToRecyclerView(null);
+            helperVertical.attachToRecyclerView(mRecyclerView);
 
-                }
+        }
 
         mAdapter.getFilter().filter(region_selected);
         mAdapter.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
@@ -170,30 +152,15 @@ public class AnimalsList extends AppCompatActivity {
         setContentView(R.layout.activity_animals_list);
 
 
-        databaseAnimals = FirebaseDatabase.getInstance().getReference("Region").child("Animal");
-
-
         //view model
         mAnimalsListViewModel = ViewModelProviders.of(AnimalsList.this).get(AnimalsListViewModel.class);
-        mAnimalsListViewModel.init_animals();
-        mAnimalsListViewModel.init_view();
+        mAnimalsListViewModel.getAnimals();
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        viewType = sharedPreferences.getInt("TYPE", 0);
+        mAnimalsListViewModel.init_view(viewType);
+
         animalList = mAnimalsListViewModel.getAnimal_item().getValue();
-
-/*
-        animalList = mAnimalsListViewModel.getAnimal_item().getValue() ;
-*/
-
-
-
-
-/*
-        for(int i=0;i<animalList.size();i++){
-            String id = databaseAnimals.push().getKey();
-            databaseAnimals.child(id).setValue(animalList.get(i));
-
-        }
-*/
-
 
 
         //get the filter
@@ -206,26 +173,17 @@ public class AnimalsList extends AppCompatActivity {
         mLayoutManager_Horizontal = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
 
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        viewType = sharedPreferences.getInt("TYPE", 0);
-
-
-        if(viewType == 0)//set layout and orientation properly each time opening the screen, and the icon
-        {mRecyclerView.setLayoutManager(mLayoutManager_Vertical);
+        if (viewType == 0)//set layout and orientation properly each time opening the screen, and the icon
+        {
+            mRecyclerView.setLayoutManager(mLayoutManager_Vertical);
+        } else if (viewType == 1) {
+            mRecyclerView.setLayoutManager(mLayoutManager_Horizontal);
+        } else if (viewType == 2) {
+            mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         }
-        else
-            if(viewType == 1) {
-                mRecyclerView.setLayoutManager(mLayoutManager_Horizontal);
-            }
-            else
-                if(viewType == 2){
-                    mRecyclerView.setLayoutManager(new GridLayoutManager(this,1));
-                }
 
 
-
-
- // calling the filter
+        // calling the filter
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -238,23 +196,21 @@ public class AnimalsList extends AppCompatActivity {
         //clicking on an item from the list
 
 
-
-
-
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mAnimalsListViewModel.send();
 
 
     }
 
 
-    public void connectViewModel(){
+    public void connectViewModel() {
         mAnimalsListViewModel.getAnimal_item().observe(this, onGetAnimalList);
-        mAnimalsListViewModel.getViewType().observe(this,onGetViewType);
+        mAnimalsListViewModel.getViewType().observe(this, onGetViewType);
     }
 
-    public void disconnectViewModel(){
+    public void disconnectViewModel() {
         mAnimalsListViewModel.getAnimal_item().removeObserver(onGetAnimalList);
         mAnimalsListViewModel.getViewType().removeObserver(onGetViewType);
 
@@ -264,6 +220,7 @@ public class AnimalsList extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         connectViewModel();
+
     }
 
     @Override
@@ -278,15 +235,11 @@ public class AnimalsList extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.list_menu, menu);
 
-        if(viewType == 0){//set layout and orientation properly each time opening the screen, and the icon
-             menu.getItem(1).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_cardlayout));
-        }
-        else
-        if(viewType == 1) {
-             menu.getItem(1).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_gridlayout));
-        }
-        else
-        if(viewType == 2){
+        if (viewType == 0) {//set layout and orientation properly each time opening the screen, and the icon
+            menu.getItem(1).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_cardlayout));
+        } else if (viewType == 1) {
+            menu.getItem(1).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_gridlayout));
+        } else if (viewType == 2) {
             menu.getItem(1).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_listlayout));
         }
         return true;
@@ -294,9 +247,9 @@ public class AnimalsList extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.item_layoutswitch:
-                if(viewType==0)//if its list layout, transform to next layout
+                if (viewType == 0)//if its list layout, transform to next layout
                 {
                     mAnimalsListViewModel.setViewType(1);
 
@@ -308,9 +261,7 @@ public class AnimalsList extends AppCompatActivity {
                     editor.commit();
 
 
-                }
-                else
-                if(viewType==1) //if its in card layout, transform to next layout
+                } else if (viewType == 1) //if its in card layout, transform to next layout
                 {
                     mAnimalsListViewModel.setViewType(2);
 
@@ -324,24 +275,21 @@ public class AnimalsList extends AppCompatActivity {
                     editor.commit();
 
 
+                } else if (viewType == 2)//if its in grid layout, transform to next layout
+                {
+
+                    mAnimalsListViewModel.setViewType(0);
+
+                    menu.getItem(1).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_cardlayout));
+
+                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.putInt("TYPE", viewType);
+                    editor.commit();
+
 
                 }
-                else
-                    if(viewType==2)//if its in grid layout, transform to next layout
-                    {
-
-                        mAnimalsListViewModel.setViewType(0);
-
-                        menu.getItem(1).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_cardlayout));
-
-                        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                        editor.putInt("TYPE", viewType);
-                        editor.commit();
-
-
-                    }
                 return true;
 
             case R.id.item_signout:
@@ -352,7 +300,7 @@ public class AnimalsList extends AppCompatActivity {
                 editor.commit();
 
                 FirebaseAuth.getInstance().signOut();
-                Intent isignout = new Intent(AnimalsList.this,UserLogin.class);
+                Intent isignout = new Intent(AnimalsList.this, UserLogin.class);
                 isignout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //clear the user
                 isignout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(isignout);
@@ -360,12 +308,12 @@ public class AnimalsList extends AppCompatActivity {
 
                 return true;
 
-            case  R.id.item_refresh:
+            case R.id.item_refresh:
                 return true;
 
 
-                default:
-                    return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
 
         }
 

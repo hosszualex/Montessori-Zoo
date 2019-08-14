@@ -10,7 +10,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -18,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalViewHolder> implements Filterable {
-    private List<Animal_item> mAnimalList = new ArrayList<>();
-    private List<Animal_item> mAnimalListFull = new ArrayList<>();
+    private List<Animal> mAnimalList = new ArrayList<>();
+    private List<Animal> mAnimalListFull = new ArrayList<>();
 
     private OnItemClickListener mListener;
 
@@ -101,7 +100,7 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
 
         if(AnimalsList.returnViewType()==0 || AnimalsList.returnViewType()==1)
         {
-            Animal_item currentItem = mAnimalList.get(position);
+            Animal currentItem = mAnimalList.get(position);
         animalViewHolder.mTitle.setText(currentItem.getmName());
         animalViewHolder.mDesc.setText(currentItem.getmDesc());
         Picasso.get().load(currentItem.getmImageAnimalURL()).into(animalViewHolder.mImageView);
@@ -110,7 +109,7 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
         else
             if(AnimalsList.returnViewType()==2)
             {
-                Animal_item currentItem = mAnimalList.get(position);
+                Animal currentItem = mAnimalList.get(position);
                 Picasso.get().load(currentItem.getmImageAnimalURL()).into(animalViewHolder.mImageView);
             }
 
@@ -118,7 +117,7 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
 
     }
 
-    public AnimalAdapter(List<Animal_item> animalList){
+    public AnimalAdapter(List<Animal> animalList){
 
         mAnimalList = animalList;
         mAnimalListFull = new ArrayList<>(animalList);
@@ -141,14 +140,14 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
-            List<Animal_item> filteredList = new ArrayList<>();
+            List<Animal> filteredList = new ArrayList<>();
 
             if(constraint == null || constraint.length() == 0){
                 filteredList.addAll(mAnimalListFull);
             }else{
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (Animal_item item : mAnimalListFull){
+                for (Animal item : mAnimalListFull){
                     if(item.getmRegion().toLowerCase().trim().contains(filterPattern)){
                         filteredList.add(item);
                     }

@@ -2,7 +2,7 @@ package com.example.montessorizoo;
 
 import android.widget.ImageView;
 
-public class Animal_item {
+public class Animal {
 
     private String mImageAnimalURL;
     private String mName;
@@ -15,7 +15,7 @@ public class Animal_item {
     private String mRegion;
 
 
-    public Animal_item(String mImageAnimal, String mName, String mDesc, String mFood, String mFunFacts, String mImageMap, String mDetails, String mAudioFile,String mRegion){
+    public Animal(String mImageAnimal, String mName, String mDesc, String mFood, String mFunFacts, String mImageMap, String mDetails, String mAudioFile, String mRegion){
         this.mImageAnimalURL=mImageAnimal;
         this.mName = mName;
         this.mDesc = mDesc;
@@ -27,7 +27,7 @@ public class Animal_item {
         this.mRegion = mRegion;
 
     }
-    public Animal_item(){};
+    public Animal(){};
 
     public void changeText1(String text){
         mName = text;
