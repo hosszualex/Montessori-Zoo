@@ -18,7 +18,7 @@ public class AnimalsListViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        mRepo.onRemoveEventListeners();
+//        mRepo.onRemoveEventListeners();
     }
 
     public void getAnimals(){
@@ -36,7 +36,7 @@ public class AnimalsListViewModel extends ViewModel {
         });
 
     }
-
+/*
     public void send(){
         mRepo.setAnimals(new IAnimalRepository.OnSetAnimalsListener() {
             @Override
@@ -49,7 +49,7 @@ public class AnimalsListViewModel extends ViewModel {
 
             }
         });
-    }
+    }*/
 
     public void init_view(int x){
         viewType.setValue(x);

@@ -162,7 +162,6 @@ public class AnimalsList extends AppCompatActivity {
 
         animalList = mAnimalsListViewModel.getAnimal_item().getValue();
 
-
         //get the filter
         Intent iFilter = getIntent();
         region_selected = iFilter.getStringExtra("FILTER");
@@ -199,7 +198,9 @@ public class AnimalsList extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+/*
         mAnimalsListViewModel.send();
+*/
 
 
     }

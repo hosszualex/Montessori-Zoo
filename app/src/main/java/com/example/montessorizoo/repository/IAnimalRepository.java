@@ -6,9 +6,10 @@ import java.util.List;
 
 public interface IAnimalRepository extends IMVVMBaseRepository {
 
-    public void getAnimals(OnGetAnimalsListener listener);
 
+/*
     public void setAnimals(OnSetAnimalsListener listener);
+*/
 
     public interface OnGetAnimalsListener {
 
@@ -17,10 +18,15 @@ public interface IAnimalRepository extends IMVVMBaseRepository {
         void onError(String error);
     }
 
-    public interface OnSetAnimalsListener {
+    public void getAnimals(OnGetAnimalsListener listener);
+
+
+
+
+/*    public interface OnSetAnimalsListener {
 
         void onSuccess();
 
         void onError(String error);
-    }
+    }*/
 }

@@ -17,12 +17,7 @@ public class Animal_itemRepository implements IAnimalRepository {
 
     DatabaseReference databaseAnimals; // for firebase storage of  data
     ValueEventListener listener;
-
-
-    public void getAnimal_item() {
-
-
-    }
+    OnGetAnimalsListener listener_animal;
 
     private List<Animal> getLocalAnimals() {
         List<Animal> dataset = new ArrayList<>();
@@ -100,10 +95,10 @@ public class Animal_itemRepository implements IAnimalRepository {
 
     @Override
     public void getAnimals(OnGetAnimalsListener listener) {
-
+        listener.onSuccess(getLocalAnimals());
     }
 
-    @Override
+/*    @Override
     public void setAnimals(OnSetAnimalsListener listener) {
 
         databaseAnimals = FirebaseDatabase.getInstance().getReference("Region").child("Animal");
@@ -141,5 +136,5 @@ public class Animal_itemRepository implements IAnimalRepository {
             }
         });
 
-    }
+    }*/
 }
