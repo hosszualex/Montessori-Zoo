@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.example.montessorizoo.repository.IMVVMBaseRepository;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -143,6 +144,7 @@ public class AnimalsList extends AppCompatActivity {
             }
         });
 
+
     };
 
 
@@ -161,6 +163,7 @@ public class AnimalsList extends AppCompatActivity {
         mAnimalsListViewModel.init_view(viewType);
 
         animalList = mAnimalsListViewModel.getAnimal_item().getValue();
+
 
         //get the filter
         Intent iFilter = getIntent();
@@ -198,9 +201,8 @@ public class AnimalsList extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-/*
-        mAnimalsListViewModel.send();
-*/
+        mAnimalsListViewModel.sendForUpload();
+        //mAnimalsListViewModel.downloadFirebase();
 
 
     }

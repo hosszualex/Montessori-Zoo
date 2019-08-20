@@ -18,7 +18,7 @@ public class AnimalsListViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-//        mRepo.onRemoveEventListeners();
+        //mRepo.onRemoveEventListeners();
     }
 
     public void getAnimals(){
@@ -36,9 +36,9 @@ public class AnimalsListViewModel extends ViewModel {
         });
 
     }
-/*
-    public void send(){
-        mRepo.setAnimals(new IAnimalRepository.OnSetAnimalsListener() {
+
+    public void sendForUpload(){
+        mRepo.uploadAnimals(new IAnimalRepository.OnUploadAnimalsListener() {
             @Override
             public void onSuccess() {
 
@@ -49,7 +49,21 @@ public class AnimalsListViewModel extends ViewModel {
 
             }
         });
-    }*/
+    }
+
+    public void downloadFirebase(){
+        mRepo.downloadAnimals(new IAnimalRepository.OnDownloadAnimalsListener() {
+            @Override
+            public void onSuccess(List<Animal> animals) {
+                mAnimal_item.setValue(animals);
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+    }
 
     public void init_view(int x){
         viewType.setValue(x);
