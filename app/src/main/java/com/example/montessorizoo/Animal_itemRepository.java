@@ -73,7 +73,7 @@ public class Animal_itemRepository implements IAnimalRepository {
                 "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
                 "wolf_sound", "Jungle"));
         dataSet.add(new Animal("https://images.pexels.com/photos/1463295/pexels-photo-1463295.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                "Parrot", "Mammal", "Meat", "They hunt in packs",
+                "Parrot1", "Mammal", "Meat", "They hunt in packs",
                 "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
                 "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
                 "wolf_sound", "Jungle"));
@@ -93,8 +93,26 @@ public class Animal_itemRepository implements IAnimalRepository {
 
     @Override
     public void getAnimals(OnGetAnimalsListener listener) {
-         listener.onSuccess(getLocalAnimals());
+        databaseAnimals = FirebaseDatabase.getInstance().getReference();
+        addRegions();
+        databaseAnimals.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Animal> animals = new ArrayList<>();
+                for (int i = 0; i < regions.size(); i++) {
+                    for (DataSnapshot ds : dataSnapshot.child(regions.get(i)).getChildren()) {
+                        animals.add(ds.getValue(Animal.class));
+                    }
+                }
+                listener.onSuccess(animals);
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onError(databaseError.getMessage());
+            }
+        });
     }
 
     @Override
@@ -109,7 +127,7 @@ public class Animal_itemRepository implements IAnimalRepository {
                 for (int i = 0; i < dataSet.size(); i++) {
                     int ok = 0;
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                        if(ds.child(dataSet.get(i).getmRegion()).child(dataSet.get(i).getmName()).exists()) {
+                        if (ds.child(dataSet.get(i).getmRegion()).child(dataSet.get(i).getmName()).exists()) {
                             ok = 1;
                             break;
                         }
@@ -117,7 +135,6 @@ public class Animal_itemRepository implements IAnimalRepository {
 
                     }
                     if (ok == 0) {
-                        String id = databaseAnimals.push().getKey();
                         databaseAnimals.child(dataSet.get(i).getmRegion()).child(dataSet.get(i).getmName()).setValue(dataSet.get(i));
 
                     }
@@ -133,59 +150,10 @@ public class Animal_itemRepository implements IAnimalRepository {
 
     }
 
-    public void addRegions(){
+    public void addRegions() {
         regions.add("North America");
         regions.add("Africa");
         regions.add("Jungle");
     }
-
-    @Override
-    public void downloadAnimals(OnDownloadAnimalsListener listener) {
-        List<Animal> dataSet = new ArrayList<>();
-        databaseAnimals = FirebaseDatabase.getInstance().getReference();
-        addRegions();
-        databaseAnimals.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(int i = 0 ; i<regions.size(); i++){
-                for(DataSnapshot ds : dataSnapshot.child(regions.get(i)).getChildren()){
-                    dataSet.add(dataSnapshot.getValue(Animal.class));
-                }
-                }
-                listener.onSuccess(dataSet);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-    }
-
-    public List<Animal> getAnimalsFromFirebase() {
-        List<Animal> dataSet = new ArrayList<>();
-        databaseAnimals = FirebaseDatabase.getInstance().getReference();
-        addRegions();
-        databaseAnimals.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(int i = 0 ; i<regions.size(); i++){
-                    for(DataSnapshot ds : dataSnapshot.child(regions.get(i)).getChildren()){
-                        dataSet.add(dataSnapshot.getValue(Animal.class));
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        return dataSet;
-
-    }
-
 
 }

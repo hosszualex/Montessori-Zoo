@@ -10,8 +10,6 @@ public interface IAnimalRepository extends IMVVMBaseRepository {
 
     public void uploadAnimals(OnUploadAnimalsListener listener);
 
-    public void downloadAnimals(OnDownloadAnimalsListener listener);
-
     public interface OnGetAnimalsListener {
 
         void onSuccess(List<Animal> animals);
@@ -26,9 +24,5 @@ public interface IAnimalRepository extends IMVVMBaseRepository {
         void onError(String error);
     }
 
-    public interface OnDownloadAnimalsListener {
-        void onSuccess(List<Animal> animals);
 
-        void onError(String error);
-    }
 }

@@ -51,19 +51,6 @@ public class AnimalsListViewModel extends ViewModel {
         });
     }
 
-    public void downloadFirebase(){
-        mRepo.downloadAnimals(new IAnimalRepository.OnDownloadAnimalsListener() {
-            @Override
-            public void onSuccess(List<Animal> animals) {
-                mAnimal_item.setValue(animals);
-            }
-
-            @Override
-            public void onError(String error) {
-
-            }
-        });
-    }
 
     public void init_view(int x){
         viewType.setValue(x);

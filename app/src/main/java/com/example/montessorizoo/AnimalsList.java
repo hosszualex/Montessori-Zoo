@@ -18,10 +18,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.example.montessorizoo.repository.IMVVMBaseRepository;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +47,6 @@ public class AnimalsList extends AppCompatActivity {
     private List<Animal> animalList = new ArrayList<>();
     public static int viewType;
 
-    DatabaseReference databaseAnimals; // for firebase storage of  data
-
     public static final String SHARED_PREFS = "sharedPrefs";
 
     public static int returnViewType() {
@@ -74,6 +70,10 @@ public class AnimalsList extends AppCompatActivity {
         viewType = view;
         helperHorizontal.attachToRecyclerView(null);
         helperVertical.attachToRecyclerView(null);
+        List<Animal> animalList = mAnimalsListViewModel.getAnimal_item().getValue();
+        if(animalList == null || animalList.isEmpty()){
+            return;
+        }
         if (viewType == 0) {
             mAdapter = new AnimalAdapter(animalList);
             mRecyclerView.setAdapter(mAdapter);
@@ -91,7 +91,6 @@ public class AnimalsList extends AppCompatActivity {
 
         }
         mRecyclerView.setAdapter(mAdapter);
-
         mAdapter.getFilter().filter(region_selected);
         mAdapter.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
             @Override
@@ -106,10 +105,10 @@ public class AnimalsList extends AppCompatActivity {
     };
 
     public Observer<List<Animal>> onGetAnimalList = animal -> {
-
-
         viewType = mAnimalsListViewModel.getViewType().getValue();
-
+        if (animal == null || animal.isEmpty()) {
+            return;
+        }
         if (viewType == 0) {
             mAdapter = new AnimalAdapter(animal);
             mRecyclerView.setAdapter(mAdapter);
@@ -157,6 +156,8 @@ public class AnimalsList extends AppCompatActivity {
         //view model
         mAnimalsListViewModel = ViewModelProviders.of(AnimalsList.this).get(AnimalsListViewModel.class);
         mAnimalsListViewModel.getAnimals();
+        mAnimalsListViewModel.sendForUpload();
+
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         viewType = sharedPreferences.getInt("TYPE", 0);
@@ -200,9 +201,6 @@ public class AnimalsList extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        mAnimalsListViewModel.sendForUpload();
-        //mAnimalsListViewModel.downloadFirebase();
 
 
     }
@@ -324,3 +322,4 @@ public class AnimalsList extends AppCompatActivity {
 
 
 }
+
