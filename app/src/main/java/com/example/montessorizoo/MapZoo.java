@@ -2,19 +2,10 @@ package com.example.montessorizoo;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Map;
 
 public class MapZoo extends AppCompatActivity {
 
@@ -24,9 +15,11 @@ public class MapZoo extends AppCompatActivity {
     ImageView image_jungle;
     ImageView image_ocean;
 
-    ImageView TEST;
-    Bitmap bitmap;
-    String URL = "https://s7img.ftdi.com/is/image/ProvideCommerce/PF_19_R299_LAY_SHP_V2?$proflowers-tile-wide-mv-new$";
+    public void sendToNextIntent(String region) {
+        final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
+        mainIntent.putExtra("FILTER", region);
+        MapZoo.this.startActivity(mainIntent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +32,7 @@ public class MapZoo extends AppCompatActivity {
         image_northamerica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
-                mainIntent.putExtra("FILTER", "North America");
-                MapZoo.this.startActivity(mainIntent);
+                sendToNextIntent("North America");
             }
         });
 
@@ -50,9 +41,7 @@ public class MapZoo extends AppCompatActivity {
         image_africa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
-                mainIntent.putExtra("FILTER", "Africa");
-                MapZoo.this.startActivity(mainIntent);
+                sendToNextIntent("Africa");
             }
         });
 
@@ -61,9 +50,7 @@ public class MapZoo extends AppCompatActivity {
         image_jungle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
-                mainIntent.putExtra("FILTER", "Jungle");
-                MapZoo.this.startActivity(mainIntent);
+                sendToNextIntent("Jungle");
 
             }
         });
@@ -73,16 +60,9 @@ public class MapZoo extends AppCompatActivity {
         image_ocean.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
-                mainIntent.putExtra("FILTER", "Ocean");
-                MapZoo.this.startActivity(mainIntent);
+                sendToNextIntent("Ocean");
             }
         });
-
-
-        TEST = findViewById(R.id.TEST);
-
-
 
     }
 

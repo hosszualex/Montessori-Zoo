@@ -65,72 +65,26 @@ public class AnimalsList extends AppCompatActivity {
         info.putExtra("SOUND", animal.get(p).getmAudioFile());
     }
 
+    public void setAdapter(List<Animal> animal, Integer view) {
 
-    public Observer<Integer> onGetViewType = view -> {
         viewType = view;
-        helperHorizontal.attachToRecyclerView(null);
-        helperVertical.attachToRecyclerView(null);
-        List<Animal> animalList = mAnimalsListViewModel.getAnimal_item().getValue();
-        if(animalList == null || animalList.isEmpty()){
-            return;
-        }
-        if (viewType == 0) {
-            mAdapter = new AnimalAdapter(animalList);
-            mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.setLayoutManager(mLayoutManager_Vertical);
-            helperVertical.attachToRecyclerView(mRecyclerView);
-        } else if (viewType == 1) {
-            mAdapter = new AnimalAdapter(animalList);
-            mRecyclerView.setAdapter(mAdapter);
-            mRecyclerView.setLayoutManager(mLayoutManager_Horizontal);
-            helperHorizontal.attachToRecyclerView(mRecyclerView);
-        } else if (viewType == 2) {
-            mAdapter = new AnimalAdapter(animalList);
-            mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-            helperVertical.attachToRecyclerView(mRecyclerView);
-
-        }
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.getFilter().filter(region_selected);
-        mAdapter.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
-            @Override
-            public void onItemClick(int position) {
-                final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
-                sendInfoIntent(animalpageIntent, position, animalList);
-                startActivity(animalpageIntent);
-            }
-        });
-
-
-    };
-
-    public Observer<List<Animal>> onGetAnimalList = animal -> {
-        viewType = mAnimalsListViewModel.getViewType().getValue();
         if (animal == null || animal.isEmpty()) {
             return;
         }
+        mAdapter = new AnimalAdapter(animal);
+        mRecyclerView.setAdapter(mAdapter);
+        helperHorizontal.attachToRecyclerView(null);
+        helperVertical.attachToRecyclerView(null);
+
         if (viewType == 0) {
-            mAdapter = new AnimalAdapter(animal);
-            mRecyclerView.setAdapter(mAdapter);
             mRecyclerView.setLayoutManager(mLayoutManager_Vertical);
-            helperHorizontal.attachToRecyclerView(null);
-            helperVertical.attachToRecyclerView(null);
             helperVertical.attachToRecyclerView(mRecyclerView);
         } else if (viewType == 1) {
-            mAdapter = new AnimalAdapter(animal);
-            mRecyclerView.setAdapter(mAdapter);
             mRecyclerView.setLayoutManager(mLayoutManager_Horizontal);
-            helperHorizontal.attachToRecyclerView(null);
-            helperVertical.attachToRecyclerView(null);
             helperHorizontal.attachToRecyclerView(mRecyclerView);
         } else if (viewType == 2) {
-            mAdapter = new AnimalAdapter(animal);
-            mRecyclerView.setAdapter(mAdapter);
             mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-            helperHorizontal.attachToRecyclerView(null);
-            helperVertical.attachToRecyclerView(null);
             helperVertical.attachToRecyclerView(mRecyclerView);
-
         }
 
         mAdapter.getFilter().filter(region_selected);
@@ -143,7 +97,16 @@ public class AnimalsList extends AppCompatActivity {
             }
         });
 
+    }
 
+    public Observer<Integer> onGetViewType = view -> {
+        List<Animal> animalList = mAnimalsListViewModel.getAnimal_item().getValue();
+        setAdapter(animalList, view);
+
+    };
+
+    public Observer<List<Animal>> onGetAnimalList = animal -> {
+        setAdapter(animal, mAnimalsListViewModel.getViewType().getValue());
     };
 
 
@@ -162,10 +125,6 @@ public class AnimalsList extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         viewType = sharedPreferences.getInt("TYPE", 0);
         mAnimalsListViewModel.init_view(viewType);
-
-        animalList = mAnimalsListViewModel.getAnimal_item().getValue();
-
-
         //get the filter
         Intent iFilter = getIntent();
         region_selected = iFilter.getStringExtra("FILTER");
@@ -185,22 +144,13 @@ public class AnimalsList extends AppCompatActivity {
             mRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         }
 
-
-        // calling the filter
-
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-
         helperVertical.attachToRecyclerView(mRecyclerView);
-
-
-        //clicking on an item from the list
-
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
     }
@@ -248,55 +198,32 @@ public class AnimalsList extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         switch (item.getItemId()) {
             case R.id.item_layoutswitch:
                 if (viewType == 0)//if its list layout, transform to next layout
                 {
                     mAnimalsListViewModel.setViewType(1);
-
                     menu.getItem(1).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_gridlayout));
-
-                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putInt("TYPE", viewType);
-                    editor.commit();
-
 
                 } else if (viewType == 1) //if its in card layout, transform to next layout
                 {
                     mAnimalsListViewModel.setViewType(2);
-
-
                     menu.getItem(1).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_listlayout));
-
-                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                    editor.putInt("TYPE", viewType);
-                    editor.commit();
-
 
                 } else if (viewType == 2)//if its in grid layout, transform to next layout
                 {
-
                     mAnimalsListViewModel.setViewType(0);
-
                     menu.getItem(1).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_cardlayout));
-
-                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                    editor.putInt("TYPE", viewType);
-                    editor.commit();
-
-
                 }
+
+                editor.putInt("TYPE", viewType);
+                editor.commit();
                 return true;
 
             case R.id.item_signout:
 
-                SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt("TYPE", 0);
                 editor.commit();
 

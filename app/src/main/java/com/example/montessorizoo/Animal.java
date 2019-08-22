@@ -15,7 +15,8 @@ public class Animal {
     private String mRegion;
 
 
-    public Animal(String mImageAnimal, String mName, String mDesc, String mFood, String mFunFacts, String mImageMap, String mDetails, String mAudioFile, String mRegion){
+    public Animal(String mImageAnimal, String mName, String mDesc, String mFood, String mFunFacts,
+                  String mImageMap, String mDetails, String mAudioFile, String mRegion){
         this.mImageAnimalURL=mImageAnimal;
         this.mName = mName;
         this.mDesc = mDesc;

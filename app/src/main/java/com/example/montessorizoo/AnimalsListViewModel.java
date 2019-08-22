@@ -18,7 +18,6 @@ public class AnimalsListViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        //mRepo.onRemoveEventListeners();
     }
 
     public void getAnimals(){
