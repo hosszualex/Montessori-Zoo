@@ -104,7 +104,10 @@ public class UserLogin extends AppCompatActivity {
 
                             });
                 }
-                //put an error handler here for empty email and password
+                else{
+                    Toast.makeText(UserLogin.this, "Please input an email and password.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

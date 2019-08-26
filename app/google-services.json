@@ -8,6 +8,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:132644719319:android:0f9ceb700b8dcca9",
+        "android_client_info": {
+          "package_name": "com.example.loginappfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132644719319-qm455qr9kk27lkjgdba4hunlnf5c0ru3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.loginappfirebase",
+            "certificate_hash": "e3a9f08567036e5d37649553c501e2672a711941"
+          }
+        },
+        {
+          "client_id": "132644719319-ggosmcd70bv8g38koah44otf275lf803.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBADNnTYVyWL0I_vLA0ie-iC45g5RwLzcc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132644719319-ggosmcd70bv8g38koah44otf275lf803.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:132644719319:android:06d2e7614ad2006d",
         "android_client_info": {
           "package_name": "com.example.montessorizoo"
@@ -20,6 +57,43 @@
           "android_info": {
             "package_name": "com.example.montessorizoo",
             "certificate_hash": "e3a9f08567036e5d37649553c501e2672a711941"
+          }
+        },
+        {
+          "client_id": "132644719319-ggosmcd70bv8g38koah44otf275lf803.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBADNnTYVyWL0I_vLA0ie-iC45g5RwLzcc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132644719319-ggosmcd70bv8g38koah44otf275lf803.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132644719319:android:a8feb836e82f9406",
+        "android_client_info": {
+          "package_name": "com.example.toddlergame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132644719319-edldp0tgn53iupqcgu18o5attim0fpnf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.toddlergame",
+            "certificate_hash": "4d90970b5a98495b41b2cb15003073811316a4f6"
           }
         },
         {
