@@ -15,6 +15,8 @@ public class Animal {
     private String mRegion;
 
 
+    public Animal(){};
+
     public Animal(String mImageAnimal, String mName, String mDesc, String mFood, String mFunFacts,
                   String mImageMap, String mDetails, String mAudioFile, String mRegion){
         this.mImageAnimalURL=mImageAnimal;
@@ -27,11 +29,6 @@ public class Animal {
         this.mAudioFile = mAudioFile;
         this.mRegion = mRegion;
 
-    }
-    public Animal(){};
-
-    public void changeText1(String text){
-        mName = text;
     }
 
     public String getmImageAnimalURL(){

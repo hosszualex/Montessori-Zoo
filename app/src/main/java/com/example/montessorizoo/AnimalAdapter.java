@@ -23,41 +23,40 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
     private OnItemClickListener mListener;
 
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
 
         mListener = listener;
     }
 
-public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
+    public static class AnimalViewHolder extends RecyclerView.ViewHolder {
 
-    public ImageView mImageView;
-    public TextView mTitle;
-    public TextView mDesc;
-    Context context;
-
+        public ImageView mImageView;
+        public TextView mTitle;
+        public TextView mDesc;
+        Context context;
 
 
         public AnimalViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
-        super(itemView);
+            super(itemView);
 
-        mImageView = itemView.findViewById(R.id.image_item);
-        mTitle = itemView.findViewById(R.id.textView_title);
-        mDesc = itemView.findViewById(R.id.textView_desc);
+            mImageView = itemView.findViewById(R.id.image_item);
+            mTitle = itemView.findViewById(R.id.textView_title);
+            mDesc = itemView.findViewById(R.id.textView_desc);
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(listener != null){
-                    int position = getAdapterPosition();
-                    if(position != RecyclerView.NO_POSITION)
-                        listener.onItemClick(position);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION)
+                            listener.onItemClick(position);
+                    }
                 }
-            }
-        });
+            });
 
 
         }
@@ -68,56 +67,44 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
     @Override
     public AnimalViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-    if(AnimalsList.returnViewType()==0)
-    {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item, viewGroup, false);
-        AnimalViewHolder avh = new AnimalViewHolder(v,mListener);
+        if (AnimalsList.returnViewType() == 0) {
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item, viewGroup, false);
+            AnimalViewHolder avh = new AnimalViewHolder(v, mListener);
 
-        return avh;
+            return avh;
+        } else if (AnimalsList.returnViewType() == 1) {
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item_card, viewGroup, false);
+            AnimalViewHolder avh_card = new AnimalViewHolder(v, mListener);
+
+            return avh_card;
+        } else if (AnimalsList.returnViewType() == 2) {
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item_grid, viewGroup, false);
+            AnimalViewHolder avh_grid = new AnimalViewHolder(v, mListener);
+
+            return avh_grid;
+        }
+
+        return null;
     }
-        else
-            if(AnimalsList.returnViewType()==1)
-    {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item_card, viewGroup, false);
-        AnimalViewHolder avh_card = new AnimalViewHolder(v,mListener);
-
-        return avh_card;
-    }
-        else
-            if(AnimalsList.returnViewType()==2)
-            {
-                View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item_grid, viewGroup, false);
-                AnimalViewHolder avh_grid = new AnimalViewHolder(v,mListener);
-
-                return avh_grid;
-            }
-
-    return null;
-}
 
     @Override
     public void onBindViewHolder(@NonNull AnimalViewHolder animalViewHolder, int position) {
 
-        if(AnimalsList.returnViewType()==0 || AnimalsList.returnViewType()==1)
-        {
+        if (AnimalsList.returnViewType() == 0 || AnimalsList.returnViewType() == 1) {
             Animal currentItem = mAnimalList.get(position);
-        animalViewHolder.mTitle.setText(currentItem.getmName());
-        animalViewHolder.mDesc.setText(currentItem.getmDesc());
-        Picasso.get().load(currentItem.getmImageAnimalURL()).into(animalViewHolder.mImageView);
+            animalViewHolder.mTitle.setText(currentItem.getmName());
+            animalViewHolder.mDesc.setText(currentItem.getmDesc());
+            Picasso.get().load(currentItem.getmImageAnimalURL()).into(animalViewHolder.mImageView);
 
+        } else if (AnimalsList.returnViewType() == 2) {
+            Animal currentItem = mAnimalList.get(position);
+            Picasso.get().load(currentItem.getmImageAnimalURL()).into(animalViewHolder.mImageView);
         }
-        else
-            if(AnimalsList.returnViewType()==2)
-            {
-                Animal currentItem = mAnimalList.get(position);
-                Picasso.get().load(currentItem.getmImageAnimalURL()).into(animalViewHolder.mImageView);
-            }
-
 
 
     }
 
-    public AnimalAdapter(List<Animal> animalList){
+    public AnimalAdapter(List<Animal> animalList) {
 
         mAnimalList = animalList;
         mAnimalListFull = new ArrayList<>(animalList);
@@ -127,7 +114,7 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
 
     @Override
     public int getItemCount() {
-    return mAnimalList.size();
+        return mAnimalList.size();
     }
 
     //filtering by the regions
@@ -142,13 +129,13 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
 
             List<Animal> filteredList = new ArrayList<>();
 
-            if(constraint == null || constraint.length() == 0){
+            if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(mAnimalListFull);
-            }else{
+            } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (Animal item : mAnimalListFull){
-                    if(item.getmRegion().toLowerCase().trim().contains(filterPattern)){
+                for (Animal item : mAnimalListFull) {
+                    if (item.getmRegion().toLowerCase().trim().contains(filterPattern)) {
                         filteredList.add(item);
                     }
                 }
@@ -157,14 +144,14 @@ public static class AnimalViewHolder extends  RecyclerView.ViewHolder {
             FilterResults results = new FilterResults();
             results.values = filteredList;
 
-            return  results;
+            return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
 
             mAnimalList.clear();
-            mAnimalList.addAll((List)results.values);
+            mAnimalList.addAll((List) results.values);
             notifyDataSetChanged();
 
         }

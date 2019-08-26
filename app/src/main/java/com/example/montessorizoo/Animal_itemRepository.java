@@ -105,7 +105,6 @@ public class Animal_itemRepository implements IAnimalRepository {
                     }
                 }
                 listener.onSuccess(animals);
-
             }
 
             @Override
