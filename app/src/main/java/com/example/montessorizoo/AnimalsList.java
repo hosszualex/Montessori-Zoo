@@ -236,10 +236,6 @@ public class AnimalsList extends AppCompatActivity {
 
                 return true;
 
-            case R.id.item_refresh:
-                return true;
-
-
             default:
                 return super.onOptionsItemSelected(item);
 

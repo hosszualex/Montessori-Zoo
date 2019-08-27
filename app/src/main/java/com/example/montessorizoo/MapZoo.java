@@ -14,6 +14,7 @@ public class MapZoo extends AppCompatActivity {
     ImageView image_africa;
     ImageView image_jungle;
     ImageView image_ocean;
+    ImageView image_australia;
 
     public void sendToNextIntent(String region) {
         final Intent mainIntent = new Intent(MapZoo.this, AnimalsList.class);
@@ -28,7 +29,6 @@ public class MapZoo extends AppCompatActivity {
 
 
         image_northamerica = findViewById(R.id.imageNorthAmerica);
-
         image_northamerica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +37,6 @@ public class MapZoo extends AppCompatActivity {
         });
 
         image_africa = findViewById(R.id.imageAfrica);
-
         image_africa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +45,6 @@ public class MapZoo extends AppCompatActivity {
         });
 
         image_jungle = findViewById(R.id.imageJungle);
-
         image_jungle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +54,6 @@ public class MapZoo extends AppCompatActivity {
         });
 
         image_ocean = findViewById(R.id.imageOcean);
-
         image_ocean.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +61,12 @@ public class MapZoo extends AppCompatActivity {
             }
         });
 
+        image_australia = findViewById(R.id.imageAustralia);
+        image_australia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendToNextIntent("Australia");
+            }
+        });
     }
-
-
 }

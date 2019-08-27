@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -28,15 +26,10 @@ public class AnimalPage extends AppCompatActivity {
     private String file_name;
     private String imageURL;
 
-    private StorageReference mStorageRefrence;
-    private FirebaseStorage mStorage;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animal_page);
-
-        mStorageRefrence = FirebaseStorage.getInstance().getReference();
 
         final Bundle iInformation = getIntent().getExtras();
 
@@ -110,7 +103,7 @@ public class AnimalPage extends AppCompatActivity {
 
     }
 
-    public void playSound(){
+    public void playSound() {
         MediaPlayer mp = new MediaPlayer();
         try {
             mp.setDataSource(file_name);
