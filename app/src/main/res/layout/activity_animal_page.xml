@@ -8,139 +8,51 @@
 
     >
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout_main"
+    <ImageView
+        android:id="@+id/image_item"
         android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            >
-
-            <ImageView
-                android:id="@+id/image_item"
-                android:layout_width="match_parent"
-                android:layout_height="260dp"
-                android:scaleType="centerCrop" />
-
-
-            <TextView
-                android:id="@+id/textView_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/image_item"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp"
-                android:text="Name"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:layout_centerInParent="true"
-
-                />
-
-            <TextView
-                android:id="@+id/textView_class"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView_name"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="16dp"
-                android:drawablePadding="10dp"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:text="Class"
-
-                />
-            <TextView
-                android:id="@+id/textView_food"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView_class"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="16dp"
-                android:drawablePadding="10dp"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:text="Likes to eat"
-                android:layout_marginBottom="10dp"
-
-                />
-
-            <TextView
-                android:id="@+id/textView_facts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView_food"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="16dp"
-                android:drawablePadding="10dp"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:text="Fun Facts"
-                android:layout_marginBottom="10dp"
-
-                />
-
-        </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout_second"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="4dp"
-        android:layout_below="@+id/relativeLayout_main"
-        >
-
-
-        <Button
-        android:id="@+id/buttonMapAnimal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Map"
-        android:layout_alignParentRight="true"
+        android:layout_height="260dp"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="60dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="70dp"
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
         />
 
-        <Button
-            android:id="@+id/buttonSound"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sound"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/buttonMapAnimal"
-            android:layout_marginRight="60dp"
-            android:layout_marginTop="40dp"
-            />
 
-        <Button
-            android:id="@+id/buttonDetail"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/roundedbutton"
-            android:text="Details"
-            android:textSize="10sp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="10dp"
-            />
+    <TextView
+        android:id="@+id/textView_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_item"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="50dp"
+        android:text="Name"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textViewDetails"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:text="Details"
-            android:layout_below="@+id/buttonDetail"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:maxLines="10"
-            />
+    <ImageView
+        android:id="@+id/imageInfo"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="500dp"
+        android:layout_marginRight="60dp"
+        android:src="@drawable/ic_info"
+        />
 
-
-    </RelativeLayout>
-
+    <ImageView
+        android:id="@+id/imageSound"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="500dp"
+        android:background="@android:drawable/ic_lock_silent_mode_off"
+        android:backgroundTint="@color/black_zoo"
+        />
 
 </RelativeLayout>
