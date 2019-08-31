@@ -31,19 +31,19 @@ public class Animal_itemRepository implements IAnimalRepository {
 
     public void addToListNorthAmerica(List<Animal> dataSet) {
         dataSet.add(new Animal("https://www.wolf.org/wp-content/uploads/2019/04/5D3_3666.jpg",
-                "Wolf", "Mammal", "Carnivora", "•They travel and hunt in packs.\n•The average pack size is 5 to 8 wolfs.\n•The average travel speed is 8 km/h.",
+                "Wolf", "Mammal", "Carnivore", "•They travel and hunt in packs.\n•The average pack size is 5 to 8 wolfs.\n•The average travel speed is 8 km/h.",
                 "https://animalfactguide.com/wp-content/uploads/2013/01/worldmap_graywolf.png",
                 "",
                 "https://firebasestorage.googleapis.com/v0/b/montessori-zoo.appspot.com/o/wolf_sound.wav?alt=media&token=0a811a4f-b487-4b52-88e0-90ac9941e147", "North America"));
         dataSet.add(new Animal("https://cdn.pixabay.com/photo/2014/07/08/12/38/mammal-386740__340.jpg",
-                "Moose", "Mammal", "Meat", "They hunt in packs",
-                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
-                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
+                "Moose", "Mammal", "Herbivore", "•Largest member of the deer family.\n•Only male moose grow antlers.\n•Moose can run up to 56 km/h.",
+                "https://a-z-animals.com/media/animals/maps/moose-location-map.png",
+                "",
                 "https://firebasestorage.googleapis.com/v0/b/montessori-zoo.appspot.com/o/moose_sound.mp3?alt=media&token=eaf52660-3dd9-4704-b647-b523c8771369", "North America"));
         dataSet.add(new Animal("https://i.cbc.ca/1.4689926.1553908134!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_780/cougar-stock.jpg",
-                "Cougar", "Mammal", "Meat", "They hunt in packs",
-                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
-                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
+                "Cougar", "Mammal", "Carnivore", "•Cougars have a maximum known lifespan of 18 years.\n•Cougars are good swimmers, although they prefer not to enter water.\n•Cougars have a poor sense of smell.",
+                "https://animalfactguide.com/wp-content/uploads/2013/01/worldmap_cougar.png",
+                "",
                 "https://firebasestorage.googleapis.com/v0/b/montessori-zoo.appspot.com/o/wolf_sound.wav?alt=media&token=0a811a4f-b487-4b52-88e0-90ac9941e147", "North America"));
         dataSet.add(new Animal("http://d279m997dpfwgl.cloudfront.net/wp/2019/08/0812-coyote-masswildlife-1000x561.jpg",
                 "Coyote", "Mammal", "Meat", "They hunt in packs",
@@ -195,10 +195,10 @@ public class Animal_itemRepository implements IAnimalRepository {
 
     public void addToListJungle(List<Animal> dataSet) {
         dataSet.add(new Animal("https://images.pexels.com/photos/1463295/pexels-photo-1463295.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                "Parrot", "Mammal", "Meat", "They hunt in packs",
-                "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
-                "The wolf (Canis lupus), also known as the gray/grey wolf, timber wolf, or tundra wolf, is a canine native to the wilderness and remote areas of Eurasia and North America. It i",
-                "https://firebasestorage.googleapis.com/v0/b/montessori-zoo.appspot.com/o/wolf_sound.wav?alt=media&token=0a811a4f-b487-4b52-88e0-90ac9941e147", "Jungle"));
+                "Parrot", "Birds", "Herbivore", "•Parrots have curved bills (beaks), strong legs and clawed feet.\n•Parrots are believed to be one of the most intelligent bird species.\n•Some species are known for imitating human voices.\n",
+                "https://a-z-animals.com/media/animals/maps/parrot-location-map.png",
+                "",
+                "https://firebasestorage.googleapis.com/v0/b/montessori-zoo.appspot.com/o/parrot_sound.mp3?alt=media&token=577d4be8-ce3e-4fcd-9f2e-fe3766ac5e9b", "Jungle"));
         dataSet.add(new Animal("http://d2a5vhda9v4n4x.cloudfront.net/wp-content/uploads/2018/06/red-eyed-tree-frog-1.jpg",
                 "Tree Frogs", "Mammal", "Meat", "They hunt in packs",
                 "http://www.chartandmapshop.com.au/productImages/full/8599.jpg",
