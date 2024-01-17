@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.example.montessorizoo.repository.IAnimalRepository;
+import com.example.montessorizoo.interfaces.IAnimalRepository;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ public class AnimalsListViewModel extends ViewModel {
     private MutableLiveData<List<Animal>> mAnimal_item = new MutableLiveData<>();
     private Animal_itemRepository mRepo = new Animal_itemRepository();
     private SingleLiveEvent<Integer> viewType = new SingleLiveEvent<>();
+    private SingleLiveEvent<Void> onError = new SingleLiveEvent<>();
 
 
     @Override
@@ -29,27 +30,14 @@ public class AnimalsListViewModel extends ViewModel {
             }
 
             @Override
-            public void onError(String error) {
-                //mError.setValue(error);
-            }
+            public void onError(String error) { onError.call(); }
         });
 
     }
 
-    public void sendForUpload(){
-        mRepo.uploadAnimals(new IAnimalRepository.OnUploadAnimalsListener() {
-            @Override
-            public void onSuccess() {
-
-            }
-
-            @Override
-            public void onError(String error) {
-
-            }
-        });
+    public LiveData<Void> onError() {
+        return onError;
     }
-
 
     public void init_view(int x){
         viewType.setValue(x);

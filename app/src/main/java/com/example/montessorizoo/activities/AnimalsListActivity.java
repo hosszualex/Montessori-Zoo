@@ -1,10 +1,11 @@
-package com.example.montessorizoo;
+package com.example.montessorizoo.activities;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,15 +18,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.montessorizoo.Animal;
+import com.example.montessorizoo.AnimalAdapter;
+import com.example.montessorizoo.AnimalsListViewModel;
+import com.example.montessorizoo.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
-public class AnimalsList extends AppCompatActivity {
+public class AnimalsListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private AnimalAdapter mAdapter;
@@ -40,6 +47,9 @@ public class AnimalsList extends AppCompatActivity {
     private static String region_selected;
 
     Toolbar toolbar;
+
+    private TextToSpeech ttName = null;
+
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -71,8 +81,10 @@ public class AnimalsList extends AppCompatActivity {
         if (animal == null || animal.isEmpty()) {
             return;
         }
+
         mAdapter = new AnimalAdapter(animal);
         mRecyclerView.setAdapter(mAdapter);
+
         helperHorizontal.attachToRecyclerView(null);
         helperVertical.attachToRecyclerView(null);
 
@@ -88,13 +100,13 @@ public class AnimalsList extends AppCompatActivity {
         }
 
         mAdapter.getFilter().filter(region_selected);
-        mAdapter.setOnItemClickListener(new AnimalAdapter.OnItemClickListener() { //clicking the item
-            @Override
-            public void onItemClick(int position) {
-                final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPage.class);
-                sendInfoIntent(animalpageIntent, position, animal);
-                startActivity(animalpageIntent);
-            }
+        mAdapter.setOnItemClickListener(position -> {         //clicking the item
+
+            playTextToSpeech(animal.get(position).getmName());
+
+            final Intent animalpageIntent = new Intent(getApplicationContext(), AnimalPageActivity.class);
+            sendInfoIntent(animalpageIntent, position, animal);
+            startActivity(animalpageIntent);
         });
 
     }
@@ -109,6 +121,10 @@ public class AnimalsList extends AppCompatActivity {
         setAdapter(animal, mAnimalsListViewModel.getViewType().getValue());
     };
 
+    private Observer<Void> onError = error -> {
+        Toast.makeText(this, "Failed to get animals", Toast.LENGTH_LONG).show();
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,10 +133,8 @@ public class AnimalsList extends AppCompatActivity {
 
 
         //view model
-        mAnimalsListViewModel = ViewModelProviders.of(AnimalsList.this).get(AnimalsListViewModel.class);
+        mAnimalsListViewModel = ViewModelProviders.of(AnimalsListActivity.this).get(AnimalsListViewModel.class);
         mAnimalsListViewModel.getAnimals();
-        mAnimalsListViewModel.sendForUpload();
-
 
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         viewType = sharedPreferences.getInt("TYPE", 0);
@@ -134,8 +148,9 @@ public class AnimalsList extends AppCompatActivity {
         mLayoutManager_Vertical = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mLayoutManager_Horizontal = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
+        initTextToSpeech();
 
-        if (viewType == 0)//set layout and orientation properly each time opening the screen, and the icon
+        if (viewType == 0)  //set layout and orientation properly each time opening the screen, and the icon
         {
             mRecyclerView.setLayoutManager(mLayoutManager_Vertical);
         } else if (viewType == 1) {
@@ -147,6 +162,7 @@ public class AnimalsList extends AppCompatActivity {
         helperVertical.attachToRecyclerView(mRecyclerView);
 
         toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -157,14 +173,15 @@ public class AnimalsList extends AppCompatActivity {
 
 
     public void connectViewModel() {
+        mAnimalsListViewModel.onError().observe(this, onError);
         mAnimalsListViewModel.getAnimal_item().observe(this, onGetAnimalList);
         mAnimalsListViewModel.getViewType().observe(this, onGetViewType);
     }
 
     public void disconnectViewModel() {
+        mAnimalsListViewModel.onError().removeObserver(onError);
         mAnimalsListViewModel.getAnimal_item().removeObserver(onGetAnimalList);
         mAnimalsListViewModel.getViewType().removeObserver(onGetViewType);
-
     }
 
     @Override
@@ -219,7 +236,7 @@ public class AnimalsList extends AppCompatActivity {
                 }
 
                 editor.putInt("TYPE", viewType);
-                editor.commit();
+                editor.apply();
                 return true;
 
             case R.id.item_signout:
@@ -228,7 +245,7 @@ public class AnimalsList extends AppCompatActivity {
                 editor.commit();
 
                 FirebaseAuth.getInstance().signOut();
-                Intent isignout = new Intent(AnimalsList.this, UserLogin.class);
+                Intent isignout = new Intent(AnimalsListActivity.this, LoginActivity.class);
                 isignout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //clear the user
                 isignout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(isignout);
@@ -243,6 +260,27 @@ public class AnimalsList extends AppCompatActivity {
 
     }
 
+    private void initTextToSpeech() {
+       ttName = new TextToSpeech(getApplicationContext(), status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                ttName.setLanguage(Locale.ENGLISH);
+            }
+        });
+    }
+
+    private void playTextToSpeech(String text) {
+        ttName.setSpeechRate((float) 0.7);
+        ttName.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(ttName != null ){
+            ttName.stop();
+            ttName.shutdown();
+        }
+        super.onDestroy();
+    }
 
 }
 

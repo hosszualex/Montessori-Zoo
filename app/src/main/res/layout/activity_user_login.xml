@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.LoginActivity"
+    android:background="#FFFFFF">
 
 
     <EditText
@@ -43,7 +44,7 @@
 
     <Button
         android:id="@+id/button_login"
-        android:layout_width="334dp"
+        android:layout_width="220dp"
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -56,7 +57,24 @@
         app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.665" />
+        app:layout_constraintVertical_bias="0.665"
+        android:fontFamily="@font/andika"
+        android:background="@drawable/roundedbutton"
+        />
+
+    <Button
+        android:id="@+id/button_registerActivity"
+        android:layout_width="220dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.532"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_login"
+        android:text="Sign Up"
+        android:fontFamily="@font/andika"
+        android:background="@drawable/roundedbutton"
+        />
 
     <CheckBox
         android:id="@+id/checkBox_sign"
@@ -66,19 +84,24 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:buttonTint="@color/colorPrimaryDark"
+        android:checked="false"
+        android:fontFamily="@font/andika"
         android:text="Keep me signed in"
+        android:textColor="@color/black_zoo"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.549"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.54" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="215dp"
-        android:layout_height="38dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -91,7 +114,9 @@
         app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.168" />
+        app:layout_constraintVertical_bias="0.168"
+        android:fontFamily="@font/andika"
+        />
 
     <ImageView
         android:id="@+id/imageView"
@@ -123,22 +148,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.418" />
 
-    <TextView
-        android:id="@+id/textview_error"
-        android:layout_width="316dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:textAlignment="center"
-        android:textColor="@color/login_error"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822" />
 </android.support.constraint.ConstraintLayout>

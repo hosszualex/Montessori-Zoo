@@ -4,92 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapZoo">
+    tools:context=".activities.ZooMapActivity">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbarMap"/>
 
     <ImageView
         android:id="@+id/imageZoo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/zoomap" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbarMap"
+        android:scaleType="fitXY"
+        android:background="@drawable/zoomap1"
+        />
+
     <ImageView
         android:id="@+id/imageNorthAmerica"
-        android:layout_width="120dp"
-        android:layout_height="100dp"
-        android:layout_alignTop="@+id/imageZoo"
-        android:layout_alignLeft="@+id/imageZoo"
-        android:layout_marginTop="215dp"
-        android:layout_marginLeft="65dp"
-        android:background="@drawable/highlight"/>
-
-
+        android:layout_width="140dp"
+        android:layout_height="110dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="93dp"
+        />
 
     <TextView
         android:id="@+id/textViewNorthAmerica"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageNorthAmerica"
-        android:layout_alignTop="@+id/imageNorthAmerica"
-        android:layout_alignEnd="@+id/imageNorthAmerica"
+        android:layout_alignLeft="@id/imageNorthAmerica"
+        android:layout_alignTop="@id/imageNorthAmerica"
         android:text="North America"
         android:textAlignment="center"
         android:textColor="@android:color/holo_blue_bright"
         android:textStyle="bold"
-        android:layout_marginTop="5dp"
+        android:fontFamily="@font/andika"
+        android:textSize="17dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="2sp"
         />
 
     <ImageView
         android:id="@+id/imageAfrica"
-        android:layout_width="120dp"
-        android:layout_height="100dp"
-        android:layout_alignTop="@+id/imageZoo"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/toolbarMap"
         android:layout_alignRight="@+id/imageZoo"
-        android:layout_marginTop="180dp"
-        android:layout_marginRight="110dp"
-        android:background="@drawable/highlight"/>
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="30dp"
+        />
     <TextView
         android:id="@+id/textViewAfrica"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageAfrica"
         android:layout_alignTop="@+id/imageAfrica"
-        android:layout_alignEnd="@+id/imageAfrica"
+        android:layout_alignLeft="@+id/imageAfrica"
         android:text="Africa"
         android:textAlignment="center"
         android:textColor="@android:color/holo_blue_bright"
         android:textStyle="bold"
         android:layout_marginTop="5dp"
+        android:fontFamily="@font/andika"
+        android:textSize="20dp"
+        android:layout_marginLeft="3dp"
         />
     <ImageView
         android:id="@+id/imageJungle"
-        android:layout_width="120dp"
-        android:layout_height="100dp"
-        android:layout_alignBottom="@+id/imageZoo"
-        android:layout_alignLeft="@+id/imageZoo"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="220dp"
-        android:background="@drawable/highlight"/>
+        android:layout_width="140dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="20dp"
+        android:layout_below="@+id/toolbarMap"
+        android:layout_marginTop="335dp"
+        />
     <TextView
         android:id="@+id/textViewJungle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageJungle"
         android:layout_alignTop="@+id/imageJungle"
-        android:layout_alignEnd="@+id/imageJungle"
+        android:layout_alignRight="@+id/imageJungle"
         android:text="Jungle"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@android:color/holo_blue_bright"
         android:textStyle="bold"
+        android:fontFamily="@font/andika"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:textSize="20dp"
         />
     <ImageView
         android:id="@+id/imageOcean"
+        android:layout_below="@+id/toolbarMap"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="25dp"
         android:layout_width="120dp"
-        android:layout_height="100dp"
-        android:layout_alignBottom="@+id/imageZoo"
-        android:layout_alignRight="@+id/imageZoo"
-        android:layout_marginRight="120dp"
-        android:layout_marginBottom="280dp"
-        android:background="@drawable/highlight"/>
+        android:layout_height="120dp"
+
+        />
     <TextView
         android:id="@+id/textViewOcean"
         android:layout_width="wrap_content"
@@ -99,31 +108,130 @@
         android:layout_alignEnd="@+id/imageOcean"
         android:text="Ocean"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@color/colorPrimary"
         android:textStyle="bold"
-        android:layout_marginTop="5dp"
+        android:fontFamily="@font/andika"
+        android:textSize="25dp"
         />
     <ImageView
         android:id="@+id/imageAustralia"
         android:layout_width="120dp"
         android:layout_height="100dp"
-        android:layout_alignBottom="@+id/imageZoo"
-        android:layout_alignRight="@+id/imageZoo"
-        android:layout_marginRight="110dp"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/highlight"/>
+        android:layout_below="@+id/toolbarMap"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="10dp"
+    />
     <TextView
         android:id="@+id/textViewAustralia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/imageAustralia"
         android:layout_alignTop="@+id/imageAustralia"
-        android:layout_alignEnd="@+id/imageAustralia"
+        android:layout_alignRight="@+id/imageAustralia"
         android:text="Australia"
         android:textAlignment="center"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@android:color/holo_blue_bright"
         android:textStyle="bold"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="2dp"
+        android:fontFamily="@font/andika"
+        android:textSize="20dp"
+        />
+    <ImageView
+        android:id="@+id/imageAntarctica"
+        android:layout_width="200dp"
+        android:layout_height="140dp"
+        android:layout_below="@+id/toolbarMap"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="160dp"
+        android:layout_marginRight="15dp"
+        />
+
+    <TextView
+        android:id="@+id/textViewAntarctica"
+        android:text="Arctic"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageAntarctica"
+        android:layout_alignRight="@+id/imageAntarctica"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/andika"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <ImageView
+        android:id="@+id/imageBird"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/imageAntarctica"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="10dp"
+        />
+
+    <TextView
+        android:id="@+id/textViewBird"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:text="Birds"
+        android:layout_alignLeft="@+id/imageBird"
+        android:layout_alignTop="@id/imageBird"
+        android:textColor="@android:color/holo_blue_bright"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <ImageView
+        android:id="@+id/imageAsia"
+        android:layout_width="180dp"
+        android:layout_height="90dp"
+        android:layout_below="@id/imageBird"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="50dp"
+        />
+
+    <TextView
+        android:id="@+id/textViewAsia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/imageAsia"
+        android:layout_alignParentRight="true"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:fontFamily="@font/andika"
+        android:text="Asia"
+        android:textColor="@android:color/holo_blue_bright"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="35dp"
+        />
+
+    <ImageView
+        android:id="@+id/imageFarm"
+        android:layout_width="190dp"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="90dp"
+        android:layout_marginBottom="3dp"
+        />
+
+    <TextView
+        android:id="@+id/textViewFarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Farm"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:layout_alignBottom="@+id/imageFarm"
+        android:layout_alignRight="@+id/imageFarm"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="30dp"
         />
 
 </RelativeLayout>

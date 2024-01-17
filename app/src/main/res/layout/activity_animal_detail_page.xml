@@ -5,16 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
+    android:background="@color/colorPrimary"
     >
-    <ImageView
-        android:id="@+id/image_map"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="260dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="70dp"
+        android:layout_height="280dp"
+        android:id="@+id/imageBorder"
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:scaleType="centerCrop" />
+        android:layout_marginRight="4dp">
+
+        <ImageView
+            android:id="@+id/image_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"/>
+
+    </android.support.v7.widget.CardView>
 
         <TextView
             android:id="@+id/textView_name"
@@ -22,17 +31,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
-            android:text="Location"
+            android:text="Name"
             android:textAlignment="center"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:layout_below="@+id/image_map"
+            android:layout_below="@+id/imageBorder"
+            android:fontFamily="@font/andika"
+            android:textColor="@color/colorPrimaryDark"
             />
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:layout_marginTop="8dp"
+    android:layout_marginTop="2dp"
     android:layout_below="@+id/textView_name"
     >
         <TextView
@@ -45,9 +56,12 @@
             android:drawablePadding="10dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:text="Class:"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:fontFamily="@font/andika"
+            android:textColor="@color/colorPrimaryDark"
+            />
     <TextView
         android:id="@+id/textView_classcontent"
         android:layout_width="wrap_content"
@@ -59,41 +73,47 @@
         android:drawablePadding="10dp"
         android:ellipsize="end"
         android:maxLines="3"
-        android:textSize="20dp"
-        android:text="CONTENT" />
+        android:textSize="18dp"
+        android:text="CONTENT"
+        android:fontFamily="@font/andika"
+        android:textColor="@color/colorPrimaryDark"
+        />
 
-        <TextView
-            android:id="@+id/textView_food"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView_class"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="16dp"
-            android:drawablePadding="10dp"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:textSize="20dp"
-            android:text="Diet:"
-            android:textStyle="bold"
-            android:layout_marginBottom="10dp"
-            />
+    <TextView
+        android:id="@+id/textView_food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_class"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        android:drawablePadding="10dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/andika"
+        android:maxLines="3"
+        android:text="Diet:"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView_foodcontent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView_class"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
         android:drawablePadding="10dp"
         android:ellipsize="end"
         android:maxLines="3"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:layout_toEndOf="@+id/textView_food"
         android:text="CONTENT"
         android:layout_marginBottom="10dp"
+        android:fontFamily="@font/andika"
+        android:textColor="@color/colorPrimaryDark"
         />
 
         <TextView
@@ -102,16 +122,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView_food"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="3dp"
             android:layout_marginRight="16dp"
             android:layout_centerHorizontal="true"
             android:drawablePadding="10dp"
             android:ellipsize="end"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:text="Fun Facts!"
-            android:layout_marginBottom="10dp"
-
+            android:layout_marginBottom="2dp"
+            android:fontFamily="@font/andika"
+            android:textColor="@color/colorPrimaryDark"
             />
     <TextView
         android:layout_width="match_parent"
@@ -119,11 +139,13 @@
         android:id="@+id/textView_factscontent"
         android:text="CONTENT FACTS"
         android:layout_below="@+id/textView_facts"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:maxLines="6"
         android:inputType="textMultiLine"
+        android:fontFamily="@font/andika"
+        android:textColor="@color/colorPrimaryDark"
         />
 
 </RelativeLayout>

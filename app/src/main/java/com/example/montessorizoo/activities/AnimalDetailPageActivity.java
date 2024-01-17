@@ -1,4 +1,4 @@
-package com.example.montessorizoo;
+package com.example.montessorizoo.activities;
 
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -8,11 +8,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.montessorizoo.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
-public class AnimalDetailPage extends AppCompatActivity {
+public class AnimalDetailPageActivity extends AppCompatActivity {
     private ImageView imageMap;
     private TextView textView_class;
     private TextView textView_food;

@@ -1,17 +1,14 @@
-package com.example.montessorizoo;
+package com.example.montessorizoo.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.os.*;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.montessorizoo.R;
 
-public class HomeScreen extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity {
 
 
     @Override
@@ -31,12 +28,12 @@ public class HomeScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-               final Intent mainIntent = new Intent(HomeScreen.this, MapZoo.class);
-                // final Intent mainIntent = new Intent(HomeScreen.this, AnimalsList.class);
-                HomeScreen.this.startActivity(mainIntent);
-                HomeScreen.this.finish();
+               final Intent mainIntent = new Intent(SplashScreenActivity.this, ZooMapActivity.class);
+                // final Intent mainIntent = new Intent(HomeScreen.this, AnimalsListActivity.class);
+                SplashScreenActivity.this.startActivity(mainIntent);
+                SplashScreenActivity.this.finish();
             }
-        }, 1000);
+        }, 5000);
 
     }
 

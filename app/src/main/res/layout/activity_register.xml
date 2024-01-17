@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.RegisterActivity"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Montessori Zoo"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/andika"
+
+        />
+
+    <EditText
+        android:id="@+id/edit_text_email"
+        android:layout_width="267dp"
+        android:layout_height="51dp"
+        android:hint="E-mail"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/title"
+        />
+
+    <EditText
+        android:id="@+id/edit_text_password"
+        android:layout_width="267dp"
+        android:layout_height="51dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/edit_text_email"
+        />
+
+    <EditText
+        android:id="@+id/edit_text_password_retype"
+        android:layout_width="267dp"
+        android:layout_height="51dp"
+        android:hint="Re-type password"
+        android:inputType="textPassword"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/edit_text_password"
+        />
+
+    <Button
+        android:id="@+id/button_register"
+        android:layout_width="334dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="60dp"
+        android:text="Register"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/edit_text_password_retype"
+        android:background="@drawable/roundedbutton"
+        android:fontFamily="@font/andika"
+        />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/checkbox_terms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_register"
+        android:textSize="18sp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="I agree to allow my child to use the Montessori Zoo application."
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="100dp"
+        android:fontFamily="@font/andika"
+        android:buttonTint="@color/colorPrimaryDark"
+        />
+
+</RelativeLayout>

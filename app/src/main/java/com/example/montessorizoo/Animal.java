@@ -66,21 +66,4 @@ public class Animal {
     public String getmRegion() {
         return mRegion;
     }
-
-
-
-    public void setmImageAnimalURL(String mImageAnimal) {
-        this.mImageAnimalURL = mImageAnimal;
-    }
-
-    public void setmName(String mName) {
-        this.mName = mName;
-    }
-
-    public void setmDesc(String mDesc) {
-        this.mDesc = mDesc;
-    }
-
-
-
 }

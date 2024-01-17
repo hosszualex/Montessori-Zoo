@@ -1,4 +1,4 @@
-package com.example.montessorizoo.repository;
+package com.example.montessorizoo.interfaces;
 
 public interface IMVVMBaseRepository {
 

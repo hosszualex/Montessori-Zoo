@@ -1,4 +1,4 @@
-package com.example.montessorizoo.repository;
+package com.example.montessorizoo.interfaces;
 
 import com.example.montessorizoo.Animal;
 
@@ -8,21 +8,11 @@ public interface IAnimalRepository extends IMVVMBaseRepository {
 
     public void getAnimals(OnGetAnimalsListener listener);
 
-    public void uploadAnimals(OnUploadAnimalsListener listener);
-
     public interface OnGetAnimalsListener {
 
         void onSuccess(List<Animal> animals);
 
         void onError(String error);
     }
-
-    public interface OnUploadAnimalsListener {
-
-        void onSuccess();
-
-        void onError(String error);
-    }
-
 
 }

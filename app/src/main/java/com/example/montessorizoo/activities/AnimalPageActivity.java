@@ -1,19 +1,20 @@
-package com.example.montessorizoo;
+package com.example.montessorizoo.activities;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Intent;
 
+import com.example.montessorizoo.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
-public class AnimalPage extends AppCompatActivity {
+import pl.bclogic.pulsator4droid.library.PulsatorLayout;
+
+public class AnimalPageActivity extends AppCompatActivity {
 
     private TextView textView_name;
     private ImageView imageView_item;
@@ -21,6 +22,7 @@ public class AnimalPage extends AppCompatActivity {
     private String imageURL;
     private ImageView imageInfo;
     private ImageView imageSound;
+    private PulsatorLayout pulsatorSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,34 +34,32 @@ public class AnimalPage extends AppCompatActivity {
         textView_name = findViewById(R.id.textView_name);
         textView_name.setText(iInformation.getString("NAME"));
 
+
+        pulsatorSound = findViewById(R.id.pulsator_sound);
+
+
         imageView_item = findViewById(R.id.image_item);
         imageURL = iInformation.getString("IMAGE_URL");
         Picasso.get().load(imageURL).into(imageView_item);
 
 
         imageInfo = findViewById(R.id.imageInfo);
-        imageInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AnimalDetailPage.class);
-                intent.putExtra("BUNDLE", iInformation);
-                startActivity(intent);
-            }
+        imageInfo.setOnClickListener( v -> {
+            Intent intent = new Intent(getApplicationContext(), AnimalDetailPageActivity.class);
+            intent.putExtra("BUNDLE", iInformation);
+            startActivity(intent);
         });
 
         //sound button
         file_name = iInformation.getString("SOUND");
         imageSound = findViewById(R.id.imageSound);
-        imageSound.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                playSound();
-            }
+        imageSound.setOnClickListener( v -> {
+            pulsatorSound.start();
+            playSound();
         });
-
     }
 
-    public void playSound() {
+    private void playSound() {
         MediaPlayer mp = new MediaPlayer();
         try {
             mp.setDataSource(file_name);

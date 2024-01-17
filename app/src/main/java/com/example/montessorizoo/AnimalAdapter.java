@@ -1,7 +1,6 @@
 package com.example.montessorizoo;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.montessorizoo.activities.AnimalsListActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
         Context context;
 
 
-        public AnimalViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+        public AnimalViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
 
             mImageView = itemView.findViewById(R.id.image_item);
@@ -57,27 +57,24 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
                     }
                 }
             });
-
-
         }
     }
 
 
-    @NonNull
     @Override
-    public AnimalViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public AnimalViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
 
-        if (AnimalsList.returnViewType() == 0) {
+        if (AnimalsListActivity.returnViewType() == 0) {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item, viewGroup, false);
             AnimalViewHolder avh = new AnimalViewHolder(v, mListener);
 
             return avh;
-        } else if (AnimalsList.returnViewType() == 1) {
+        } else if (AnimalsListActivity.returnViewType() == 1) {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item_card, viewGroup, false);
             AnimalViewHolder avh_card = new AnimalViewHolder(v, mListener);
 
             return avh_card;
-        } else if (AnimalsList.returnViewType() == 2) {
+        } else if (AnimalsListActivity.returnViewType() == 2) {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.animal_item_grid, viewGroup, false);
             AnimalViewHolder avh_grid = new AnimalViewHolder(v, mListener);
 
@@ -88,20 +85,18 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AnimalViewHolder animalViewHolder, int position) {
+    public void onBindViewHolder(AnimalViewHolder animalViewHolder, int position) {
 
-        if (AnimalsList.returnViewType() == 0 || AnimalsList.returnViewType() == 1) {
+        if (AnimalsListActivity.returnViewType() == 0 || AnimalsListActivity.returnViewType() == 1) {
             Animal currentItem = mAnimalList.get(position);
             animalViewHolder.mTitle.setText(currentItem.getmName());
             animalViewHolder.mDesc.setText(currentItem.getmDesc());
             Picasso.get().load(currentItem.getmImageAnimalURL()).into(animalViewHolder.mImageView);
 
-        } else if (AnimalsList.returnViewType() == 2) {
+        } else if (AnimalsListActivity.returnViewType() == 2) {
             Animal currentItem = mAnimalList.get(position);
             Picasso.get().load(currentItem.getmImageAnimalURL()).into(animalViewHolder.mImageView);
         }
-
-
     }
 
     public AnimalAdapter(List<Animal> animalList) {
